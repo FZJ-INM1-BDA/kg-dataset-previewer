@@ -1,0 +1,127 @@
+[
+  [
+    "Probabilistic cytoarchitectonic map of Ch 123 (Basal Forebrain) (v4.2)",
+    [
+      {
+        "filename": "Ch 123 (Basal Forebrain) [v4.2, ICBM 2009c Asymmetric, left hemisphere]",
+        "templateSpace": "MNI 152 ICBM 2009c Nonlinear Asymmetric",
+        "name": "Ch 123 (Basal Forebrain) [v4.2, ICBM 2009c Asymmetric, left hemisphere]",
+        "mimetype": "application/nifti",
+        "url": "https://neuroglancer.humanbrainproject.eu/precomputed/JuBrain/17/icbm152casym/pmaps/Bforebrain_123_l_N10_nlin2MNI152ASYM2009C_4.2_publicP_2ee34ae3e4b3d88ead80c2ca66cbd91a.nii.gz",
+        "position": [
+          -3648265,
+          3367508,
+          -8957413
+        ]
+      },
+      {
+        "filename": "Ch 123 (Basal Forebrain) [v4.2, Colin 27, left hemisphere]",
+        "templateSpace": "MNI Colin 27",
+        "name": "Ch 123 (Basal Forebrain) [v4.2, Colin 27, left hemisphere]",
+        "mimetype": "application/nifti",
+        "url": "https://neuroglancer.humanbrainproject.eu/precomputed/JuBrain/17/colin27/pmaps/Bforebrain_123_l_N10_nlin2Stdcolin27_4.2_publicP_276e61aa375a96aa30727b96fdbcb359.nii.gz",
+        "position": [
+          -2339339,
+          4405405,
+          -8804805
+        ]
+      },
+      {
+        "filename": "Ch 123 (Basal Forebrain) [v4.2, ICBM 2009c Asymmetric, right hemisphere]",
+        "templateSpace": "MNI 152 ICBM 2009c Nonlinear Asymmetric",
+        "name": "Ch 123 (Basal Forebrain) [v4.2, ICBM 2009c Asymmetric, right hemisphere]",
+        "mimetype": "application/nifti",
+        "url": "https://neuroglancer.humanbrainproject.eu/precomputed/JuBrain/17/icbm152casym/pmaps/Bforebrain_123_r_N10_nlin2MNI152ASYM2009C_4.2_publicP_5150e72146b5a751407c4dc28ba1703b.nii.gz",
+        "position": [
+          1687097,
+          4148387,
+          -8461290
+        ]
+      },
+      {
+        "filename": "Ch 123 (Basal Forebrain) [v4.2, Colin 27, right hemisphere]",
+        "templateSpace": "MNI Colin 27",
+        "name": "Ch 123 (Basal Forebrain) [v4.2, Colin 27, right hemisphere]",
+        "mimetype": "application/nifti",
+        "url": "https://neuroglancer.humanbrainproject.eu/precomputed/JuBrain/17/colin27/pmaps/Bforebrain_123_r_N10_nlin2Stdcolin27_4.2_publicP_08a22f59a0ef477bcd6839aa94654d41.nii.gz",
+        "position": [
+          3240000,
+          5153846,
+          -8347692
+        ]
+      }
+    ]
+  ],
+  [
+    "Probabilistic cytoarchitectonic map of Area ifj2 (IFS/PreCS) (v2.2)",
+    [
+      {
+        "filename": "Area ifj2 (IFS/PreCS) [v2.2, ICBM 2009c Asymmetric, left hemisphere]",
+        "templateSpace": "MNI 152 ICBM 2009c Nonlinear Asymmetric",
+        "name": "Area ifj2 (IFS/PreCS) [v2.2, ICBM 2009c Asymmetric, left hemisphere]",
+        "mimetype": "application/nifti",
+        "url": "https://neuroglancer.humanbrainproject.eu/precomputed/JuBrain/17/icbm152casym/pmaps/IFS_ifj2_l_N10_nlin2MNI152ASYM2009C_2.2_publicDOI_0c3fa7a162ff6d09b5d7127d68750969.nii.gz"
+      },
+      {
+        "filename": "Area ifj2 (IFS/PreCS) [v2.2, Colin 27, left hemisphere]",
+        "templateSpace": "MNI Colin 27",
+        "name": "Area ifj2 (IFS/PreCS) [v2.2, Colin 27, left hemisphere]",
+        "mimetype": "application/nifti",
+        "url": "https://neuroglancer.humanbrainproject.eu/precomputed/JuBrain/17/colin27/pmaps/IFS_ifj2_l_N10_nlin2Stdcolin27_2.2_publicDOI_86b9e91d54b288198f3604075196534f.nii.gz"
+      },
+      {
+        "filename": "Area ifj2 (IFS/PreCS) [v2.2, ICBM 2009c Asymmetric, right hemisphere]",
+        "templateSpace": "MNI 152 ICBM 2009c Nonlinear Asymmetric",
+        "name": "Area ifj2 (IFS/PreCS) [v2.2, ICBM 2009c Asymmetric, right hemisphere]",
+        "mimetype": "application/nifti",
+        "url": "https://neuroglancer.humanbrainproject.eu/precomputed/JuBrain/17/icbm152casym/pmaps/IFS_ifj2_r_N10_nlin2MNI152ASYM2009C_2.2_publicDOI_a988cbde839a0399e767be7ef02cc95c.nii.gz"
+      },
+      {
+        "filename": "Area ifj2 (IFS/PreCS) [v2.2, Colin 27, right hemisphere]",
+        "templateSpace": "MNI Colin 27",
+        "name": "Area ifj2 (IFS/PreCS) [v2.2, Colin 27, right hemisphere]",
+        "mimetype": "application/nifti",
+        "url": "https://neuroglancer.humanbrainproject.eu/precomputed/JuBrain/17/colin27/pmaps/IFS_ifj2_r_N10_nlin2Stdcolin27_2.2_publicDOI_346dca14e393e290b70807d4e30cd835.nii.gz"
+      }
+    ]
+  ],
+  [
+    "Probabilistic cytoarchitectonic map of Area Fp1 (Fpole)",
+    [
+      {
+        "filename": "Cytoarchitectonic Probabilistic Map for Area Fp1 (Fpole)",
+        "templateSpace": "MNI Colin 27",
+        "name": "Cytoarchitectonic Probabilistic Map for Area Fp1 (Fpole)",
+        "mimetype": "application/nifti",
+        "url": "https://neuroglancer.humanbrainproject.org/precomputed/JuBrain/v2.2c/PMaps/FrontalPole_Fp1.nii",
+        "properties": {}
+      }
+    ]
+  ],
+  [
+    "Probabilistic cytoarchitectonic map of Area Fp2 (Fpole)",
+    [
+      {
+        "filename": "Cytoarchitectonic Probabilistic Map for Area Fp2 (Fpole)",
+        "templateSpace": "MNI Colin 27",
+        "name": "Cytoarchitectonic Probabilistic Map for Area Fp2 (Fpole)",
+        "mimetype": "application/nifti",
+        "url": "https://neuroglancer.humanbrainproject.org/precomputed/JuBrain/v2.2c/PMaps/FrontalPole_Fp2.nii",
+        "properties": {}
+      }
+    ]
+  ],
+  [
+    "Probabilistic cytoarchitectonic map of Subc (Hippocampus)",
+    [
+      {
+        "filename": "Cytoarchitectonic Probabilistic Map for Subc (Hippocampus)",
+        "templateSpace": "MNI Colin 27",
+        "name": "Cytoarchitectonic Probabilistic Map for Subc (Hippocampus)",
+        "mimetype": "application/nifti",
+        "url": "https://neuroglancer.humanbrainproject.org/precomputed/JuBrain/v2.2c/PMaps/Hippocampus_Subc.nii",
+        "properties": {}
+      }
+    ]
+  ]
+]

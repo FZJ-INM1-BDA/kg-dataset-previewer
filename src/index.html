@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0">
+  <title>Stencil Component Starter</title>
+
+  <script type="module" src="/build/kg-dataset-previewer.esm.js"></script>
+  <script nomodule src="/build/kg-dataset-previewer.js"></script>
+
+</head>
+<body>
+
+  <kg-dataset-list
+    kg-ds-prv-container-class="ul-container test-container"
+    kg-ds-prv-item-class="item-class"
+    kg-ds-prv-kg-id="cb875c0d-97f4-4dbc-a9ce-472d8ba58c99">
+  
+  </kg-dataset-list>
+
+  <kg-dataset-previewer
+    kg-ds-prv-kg-id="cb875c0d-97f4-4dbc-a9ce-472d8ba58c99"
+    kg-ds-prv-filename="5-HT₂(5-HT)/autoradiography">
+  </kg-dataset-previewer>
+  <kg-dataset-previewer
+    style="display:block; width: 500px; height: 500px;"
+    kg-ds-prv-kg-id="cb875c0d-97f4-4dbc-a9ce-472d8ba58c99"
+    kg-ds-prv-filename="α₁(NA)/profile">
+  </kg-dataset-previewer>
+  <kg-dataset-previewer
+    style="display:block; width: 500px; height: 500px;"
+    kg-ds-prv-kg-id="e715e1f7-2079-45c4-a67f-f76b102acfce"
+    kg-ds-prv-filename="fingerprint">
+  </kg-dataset-previewer>
+</body>
+</html>
