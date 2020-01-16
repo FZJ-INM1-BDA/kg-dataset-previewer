@@ -1,8 +1,9 @@
 const router = require('./router')
+const PORT = process.env.PORT || 1234
 
 const app = require('express')()
 
 app.use(require('cors')())
 app.use('/datasetPreview', router)
 
-app.listen(1234, () => console.log('app listening'))
+app.listen(PORT, () => console.log('app listening'))

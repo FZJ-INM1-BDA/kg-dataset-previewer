@@ -12,7 +12,8 @@
   "unpkg": "dist/kg-dataset-previewer/kg-dataset-previewer.js",
   "files": [
     "dist/",
-    "loader/"
+    "loader/",
+    "deploy/"
   ],
   "scripts": {
     "build": "stencil build --docs",
