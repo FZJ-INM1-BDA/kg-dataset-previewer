@@ -114,13 +114,25 @@ export function getPatchChartJsOption({ darkmode } : { darkmode: boolean } = { d
     }
   }
 
+  const patchFontColor = prop => {
+    if (!prop) return null
+    const { fontColor, ...rest } = prop
+    return {
+      ...rest,
+      fontColor: darkmode
+        ? `rgba(255, 255, 255, 0.8)`
+        : `rgba(0, 0, 0, 0.8)`
+    }
+  }
+
   const patchScale = scale => {
     if (!scale) return null
     const {
       angleLines,
       gridLines,
-      // ticks,
-      // scaleLabel,
+      ticks,
+      scaleLabel,
+      pointLabels,
       ...restScale
     } = scale
     const overwritingObj = {
@@ -130,6 +142,9 @@ export function getPatchChartJsOption({ darkmode } : { darkmode: boolean } = { d
       ...(
         {gridLines: patchColor(gridLines || {})}
       ),
+      ...{scaleLabel: patchFontColor(scaleLabel || {})},
+      ...{ticks: patchFontColor(ticks || {})},
+      ...{pointLabels: patchFontColor(pointLabels || {})}
     }
     return {
       ...restScale,
@@ -156,7 +171,8 @@ export function getPatchChartJsOption({ darkmode } : { darkmode: boolean } = { d
   }
   return function patchChartJsOption(chartOption: ChartConfiguration): ChartConfiguration{
     const { options , ...rest } = chartOption
-    const { scale, scales, animation = {}, ...otherOptions } = options
+    const { scale, legend, title, scales, animation = {}, ...otherOptions } = options
+    
     return {
       ...rest,
       options: {
@@ -168,8 +184,23 @@ export function getPatchChartJsOption({ darkmode } : { darkmode: boolean } = { d
           : {}
         ),
         ...(
+          title
+          ? {title: patchFontColor(title)}
+          : {}
+        ),
+        ...(
           scales
           ? {scales: patchScales(scales)}
+          : {}
+        ),
+        ...(
+          legend
+          ? {
+              legend: {
+                ...legend,
+                labels:patchFontColor(legend.labels || {})
+              }
+            }
           : {}
         )
       }

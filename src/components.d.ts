@@ -7,12 +7,15 @@
 
 
 import { HTMLStencilElement, JSXBase } from '@stencil/core/internal';
-
+import {
+  IDatasetFile,
+} from './utils/renderUtil';
 
 export namespace Components {
   interface KgDatasetList {
     'backendUrl': string;
     'containerClass': string;
+    'getDatasetFiles': () => Promise<IDatasetFile[]>;
     'itemClass': string;
     'kgId': string;
     'kgSchema': string;
@@ -64,6 +67,7 @@ declare namespace LocalJSX {
     'itemClass'?: string;
     'kgId'?: string;
     'kgSchema'?: string;
+    'onKgDsPrvUpdated'?: (event: CustomEvent<any>) => void;
   }
   interface KgDatasetPreviewer {
     'backendUrl'?: string;

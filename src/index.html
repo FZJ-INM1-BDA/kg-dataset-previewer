@@ -58,10 +58,16 @@
   if (!checkbox) throw new Error(`checkbox not found`)
 
   const kgDsPrvs = document.querySelectorAll('kg-dataset-previewer')
-  
+  const kgDsLists = document.querySelectorAll('kg-dataset-list')
+
+  for (const list of kgDsLists){
+    list.addEventListener('kgDsPrvUpdated', ({ detail }) => {
+      console.log('kgDsPrvUpdated fired', detail)
+    })
+  }
   document.addEventListener('change', (ev) => {
     const { checked } = checkbox
-    
+
     for (const prvs of kgDsPrvs){
       prvs.setAttribute('kg-ds-prv-darkmode', checked)
     }

@@ -1,4 +1,4 @@
-import { Component, Prop, h, Watch, State } from '@stencil/core';
+import { Component, Prop, h, Watch, State, Method, Event, EventEmitter } from '@stencil/core';
 import { KG_DATASET_PREVIEWER_BACKEND_URL, getKgInfo } from '../../utils/utils'
 import { IDatasetFile, getRenderList } from '../../utils/renderUtil'
 
@@ -29,6 +29,16 @@ export class KgDatasetPreviewer {
     attribute: 'kg-ds-prv-item-class'
   })
   itemClass: string = ''
+
+  @Method() 
+  async getDatasetFiles() {
+    return this.datasetFiles
+  }
+
+  @Event({
+    bubbles: true,
+    composed: true
+  }) kgDsPrvUpdated: EventEmitter
 
   @State() datasetFiles: IDatasetFile[] = []
 
@@ -83,6 +93,14 @@ export class KgDatasetPreviewer {
   }
 
   render() {
+    const { kgId, kgSchema, backendUrl, datasetFiles, loadingFlag } = this
+    this.kgDsPrvUpdated.emit({
+      kgSchema,
+      kgId,
+      backendUrl,
+      datasetFiles,
+      loadingFlag
+    })
     return this.error
       ? <span>{this.error}</span>
       : this.loadingFlag
