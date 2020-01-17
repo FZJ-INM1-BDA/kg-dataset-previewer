@@ -1,7 +1,7 @@
 import { h, Component, Prop, Element, Watch, State } from '@stencil/core'
 import { ChartConfiguration } from 'chart.js'
 import Chart from 'chart.js'
-import { patchChartJsRadar } from '../../utils/utils'
+import { patchChartJsRadar, getPatchChartJsOption } from '../../utils/utils'
 
 interface PreviewData{
   "chart.js": ChartConfiguration
@@ -18,6 +18,11 @@ export class KgPreviewChart{
     mutable: false
   }) dataProp: string
 
+  @Prop({
+    reflect: true,
+    attribute: 'kg-ds-prv-darkmode'
+  }) darkmode: boolean = false
+
   data: PreviewData
   
   @Watch('dataProp')
@@ -26,6 +31,13 @@ export class KgPreviewChart{
   }
 
   @State() chartjsDataProvided: boolean = true
+
+  @State() patchChartjsOptions = getPatchChartJsOption({ darkmode: this.darkmode })
+
+  @Watch('darkmode')
+  setPatchChartJsOption(){
+    this.patchChartjsOptions = getPatchChartJsOption({ darkmode: this.darkmode })
+  }
 
   @Element()
   el: HTMLElement
@@ -53,7 +65,6 @@ export class KgPreviewChart{
     const { width, height } = this.getHostElementInfo()
     this.canvas.width = width
     this.canvas.height = height
-
   }
 
   protected renderChart():void{
@@ -61,7 +72,11 @@ export class KgPreviewChart{
       return
     }
     
-    this.chart = new Chart(this.canvas, this.data['chart.js'])
+    const copiedConfiguration = JSON.parse(JSON.stringify(this.data['chart.js']))
+
+    const chartConfiguration = this.patchChartjsOptions(copiedConfiguration)
+
+    this.chart = new Chart(this.canvas, chartConfiguration)
   }
 
   protected setConfigData(){
@@ -71,6 +86,7 @@ export class KgPreviewChart{
   
   protected componentDidUpdate():void{
     this.attachChartjs()
+    this.setConfigData()
   }
 
   protected componentDidLoad():void{

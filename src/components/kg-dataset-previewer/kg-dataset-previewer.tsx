@@ -9,25 +9,40 @@ import { IDatasetFile, getRenderFunction, prependUrl } from '../../utils/renderU
 export class KgDatasetPreviewer {
 
   @Prop({
+    reflect: true,
     attribute: `kg-ds-prv-kg-schema`
   }) kgSchema: string = `minds/core/dataset/v1.0.0`;
 
   @Prop({
+    reflect: true,
     attribute: `kg-ds-prv-kg-id`
   }) kgId: string;
 
   @Prop({
+    reflect: true,
     attribute: `kg-ds-prv-backend-url`
   }) backendUrl: string = KG_DATASET_PREVIEWER_BACKEND_URL;
 
   @Prop({
+    reflect: true,
     attribute: 'kg-ds-prv-filename'
   }) filename: string
+
+  @Prop({
+    reflect: true,
+    attribute: `kg-ds-prv-darkmode`
+  }) darkmode: boolean = false
 
   loadingFlag: boolean = false
   error: string
   @State() displayFile: IDatasetFile
-  @State() renderFn: Function = getRenderFunction()
+  @State() renderFn: Function = getRenderFunction({ darkmode: this.darkmode })
+
+
+  @Watch('darkmode')
+  setNewRenderRn(){
+    this.renderFn = getRenderFunction({ darkmode: this.darkmode })
+  }
 
   @Watch('kgId')
   @Watch('filename')

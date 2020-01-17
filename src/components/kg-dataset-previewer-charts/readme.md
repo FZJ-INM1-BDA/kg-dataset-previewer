@@ -7,9 +7,10 @@
 
 ## Properties
 
-| Property   | Attribute                | Description | Type     | Default     |
-| ---------- | ------------------------ | ----------- | -------- | ----------- |
-| `dataProp` | `kg-ds-prv-chartjs-data` |             | `string` | `undefined` |
+| Property   | Attribute                | Description | Type      | Default     |
+| ---------- | ------------------------ | ----------- | --------- | ----------- |
+| `darkmode` | `kg-ds-prv-darkmode`     |             | `boolean` | `false`     |
+| `dataProp` | `kg-ds-prv-chartjs-data` |             | `string`  | `undefined` |
 
 
 ## Dependencies

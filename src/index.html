@@ -7,30 +7,70 @@
 
   <script type="module" src="/build/kg-dataset-previewer.esm.js"></script>
   <script nomodule src="/build/kg-dataset-previewer.js"></script>
+  <style>
+    html, body, #container
+    {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
 
+    #container
+    {
+      display: flex!important;
+      flex-direction: row;
+    }
+  </style>
 </head>
 <body>
-
-  <kg-dataset-list
-    kg-ds-prv-container-class="ul-container test-container"
-    kg-ds-prv-item-class="item-class"
-    kg-ds-prv-kg-id="cb875c0d-97f4-4dbc-a9ce-472d8ba58c99">
+  <label for="darkmode-checkbox">
+    <input type="checkbox" id="darkmode-checkbox">darkmode
+  </label>
   
-  </kg-dataset-list>
+  <div id="container">
 
-  <kg-dataset-previewer
-    kg-ds-prv-kg-id="cb875c0d-97f4-4dbc-a9ce-472d8ba58c99"
-    kg-ds-prv-filename="5-HT₂(5-HT)/autoradiography">
-  </kg-dataset-previewer>
-  <kg-dataset-previewer
-    style="display:block; width: 500px; height: 500px;"
-    kg-ds-prv-kg-id="cb875c0d-97f4-4dbc-a9ce-472d8ba58c99"
-    kg-ds-prv-filename="α₁(NA)/profile">
-  </kg-dataset-previewer>
-  <kg-dataset-previewer
-    style="display:block; width: 500px; height: 500px;"
-    kg-ds-prv-kg-id="e715e1f7-2079-45c4-a67f-f76b102acfce"
-    kg-ds-prv-filename="fingerprint">
-  </kg-dataset-previewer>
+    <kg-dataset-list
+      kg-ds-prv-container-class="ul-container test-container"
+      kg-ds-prv-item-class="item-class"
+      kg-ds-prv-kg-id="cb875c0d-97f4-4dbc-a9ce-472d8ba58c99">
+    
+    </kg-dataset-list>
+
+    <kg-dataset-previewer
+      kg-ds-prv-kg-id="cb875c0d-97f4-4dbc-a9ce-472d8ba58c99"
+      kg-ds-prv-filename="5-HT₂(5-HT)/autoradiography">
+    </kg-dataset-previewer>
+    <kg-dataset-previewer
+      style="display:block; width: 500px; height: 500px;"
+      kg-ds-prv-kg-id="cb875c0d-97f4-4dbc-a9ce-472d8ba58c99"
+      kg-ds-prv-filename="α₁(NA)/profile">
+    </kg-dataset-previewer>
+    <kg-dataset-previewer
+      style="display:block; width: 500px; height: 500px;"
+      kg-ds-prv-kg-id="e715e1f7-2079-45c4-a67f-f76b102acfce"
+      kg-ds-prv-filename="fingerprint">
+    </kg-dataset-previewer>
+  </div>
+
 </body>
+<script>
+  const checkbox = document.getElementById('darkmode-checkbox')
+  if (!checkbox) throw new Error(`checkbox not found`)
+
+  const kgDsPrvs = document.querySelectorAll('kg-dataset-previewer')
+  
+  document.addEventListener('change', (ev) => {
+    const { checked } = checkbox
+    
+    for (const prvs of kgDsPrvs){
+      prvs.setAttribute('kg-ds-prv-darkmode', checked)
+    }
+
+    if (checked) {
+      document.body.style.backgroundColor = `rgb(0,0,0)`
+    } else {
+      document.body.style.backgroundColor = `rgb(255,255,255)`
+    }
+  })
+</script>
 </html>

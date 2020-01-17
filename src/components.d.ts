@@ -19,11 +19,13 @@ export namespace Components {
   }
   interface KgDatasetPreviewer {
     'backendUrl': string;
+    'darkmode': boolean;
     'filename': string;
     'kgId': string;
     'kgSchema': string;
   }
   interface KgDatasetPreviewerChart {
+    'darkmode': boolean;
     'dataProp': string;
   }
 }
@@ -65,11 +67,13 @@ declare namespace LocalJSX {
   }
   interface KgDatasetPreviewer {
     'backendUrl'?: string;
+    'darkmode'?: boolean;
     'filename'?: string;
     'kgId'?: string;
     'kgSchema'?: string;
   }
   interface KgDatasetPreviewerChart {
+    'darkmode'?: boolean;
     'dataProp'?: string;
   }
 
