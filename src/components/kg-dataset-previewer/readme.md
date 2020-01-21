@@ -16,6 +16,26 @@
 | `kgSchema`   | `kg-ds-prv-kg-schema`   |             | `string`  | ``minds/core/dataset/v1.0.0``      |
 
 
+## Events
+
+| Event         | Description | Type               |
+| ------------- | ----------- | ------------------ |
+| `renderEvent` |             | `CustomEvent<any>` |
+
+
+## Methods
+
+### `getDownloadPreviewHref() => Promise<unknown>`
+
+
+
+#### Returns
+
+Type: `Promise<unknown>`
+
+
+
+
 ## Dependencies
 
 ### Depends on

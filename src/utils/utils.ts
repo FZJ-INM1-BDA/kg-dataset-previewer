@@ -1,4 +1,4 @@
-import Chart, { ChartConfiguration, ChartOptions } from 'chart.js'
+import Chart, { ChartConfiguration, ChartOptions, ChartData } from 'chart.js'
 
 // managed by replace plugin
 export const KG_DATASET_PREVIEWER_BACKEND_URL = `__BACKEND_URL__`
@@ -206,4 +206,45 @@ export function getPatchChartJsOption({ darkmode } : { darkmode: boolean } = { d
       }
     }
   }
+}
+
+export function wrapTextForCsv(text){
+  return `"${text.toString().replace(/"/g, '""')}"`
+}
+
+export function getCsvFromDataset(data){
+  const chartJs = data['chart.js']
+  if (!chartJs) throw new Error(`data['chart.js'] is not defined.`)
+  const { type } = chartJs as ChartConfiguration
+  let output = ''
+  if (type === 'radar') {
+    const { data } = chartJs
+    const { labels, datasets } = data as ChartData
+    
+    output += `"",${datasets.map(({ label }) => wrapTextForCsv(label)).join(',')}`
+    for (const indexAsStr in labels){
+      output += `\n${wrapTextForCsv(labels[indexAsStr])},${datasets.map(({ data }) => wrapTextForCsv(data[indexAsStr])).join(',')}`
+    }
+    return output
+  }
+  if (type === 'line') {
+    const { options, data } = chartJs
+    const { scales } = options
+    const { xAxes, yAxes } = scales
+    const { scaleLabel: xScaleLabel} = xAxes[0]
+    const { labelString: xLabelString } = xScaleLabel
+
+    const { scaleLabel: yScaleLabel} = yAxes[0]
+    const { labelString: yLabelString } = yScaleLabel
+
+    output += `${wrapTextForCsv(xLabelString)},${wrapTextForCsv(yLabelString)}`
+
+    const { labels, datasets } = data
+    for (const index in labels){
+      output += `\n${wrapTextForCsv(labels[index])},${wrapTextForCsv(datasets.map(({ data }) => wrapTextForCsv(data[index].y) ))}`
+    }
+
+    return output
+  }
+  throw new Error(`Unknown chartjs type: ${type}`)
 }

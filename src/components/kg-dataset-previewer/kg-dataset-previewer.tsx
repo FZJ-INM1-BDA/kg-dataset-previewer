@@ -1,4 +1,4 @@
-import { Component, Prop, h, Watch, State } from '@stencil/core';
+import { Component, Prop, h, Watch, State, Method, Element, Event, EventEmitter } from '@stencil/core';
 import { KG_DATASET_PREVIEWER_BACKEND_URL } from '../../utils/utils'
 import { IDatasetFile, getRenderFunction, prependUrl } from '../../utils/renderUtil'
 
@@ -38,6 +38,35 @@ export class KgDatasetPreviewer {
   @State() displayFile: IDatasetFile
   @State() renderFn: Function = getRenderFunction({ darkmode: this.darkmode })
 
+
+  @Element()
+  el: HTMLElement
+
+  @Event({
+    bubbles: true,
+    composed: true
+  }) renderEvent: EventEmitter
+
+
+  @Method()
+  async getDownloadPreviewHref(){
+    
+    const imgTag = this.el.querySelector('img')
+    if (imgTag) return imgTag.getAttribute('src')
+
+    const chartEl = this.el.querySelector('kg-dataset-previewer-chart')
+    if (chartEl) return await chartEl['getHrefUrl']()
+
+    throw new Error(`neither img nor chart exist`)
+  }
+
+  @Method()
+  async getDownloadCsvHref(){
+    const chartEl = this.el.querySelector('kg-dataset-previewer-chart')
+    if (chartEl) return await chartEl['getCsvUrl']()
+
+    throw new Error(`chart does not exist`)
+  }
 
   @Watch('darkmode')
   setNewRenderRn(){
@@ -86,6 +115,7 @@ export class KgDatasetPreviewer {
   }
 
   render() {
+    setTimeout(this.renderEvent.emit)
     return this.error
       ? <span>{this.error}</span>
       : this.loadingFlag

@@ -1,6 +1,6 @@
 {
   "name": "kg-dataset-previewer",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "description": "Preview a few manually curated datasets.",
   "main": "dist/index.js",
   "module": "dist/index.mjs",

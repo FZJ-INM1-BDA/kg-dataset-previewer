@@ -51,7 +51,9 @@
       kg-ds-prv-filename="fingerprint">
     </kg-dataset-previewer>
   </div>
+  <div id="btn-container">
 
+  </div>
 </body>
 <script>
   const checkbox = document.getElementById('darkmode-checkbox')
@@ -59,6 +61,32 @@
 
   const kgDsPrvs = document.querySelectorAll('kg-dataset-previewer')
   const kgDsLists = document.querySelectorAll('kg-dataset-list')
+
+  const container = document.getElementById('btn-container')
+
+  for (const prv of kgDsPrvs) {
+    prv.addEventListener('renderEvent', async () => {
+      try{
+
+        const imgHref = await prv.getDownloadPreviewHref()
+        const csvHref = await prv.getDownloadCsvHref()
+        console.log({ imgHref, csvHref })
+        
+        const a1 = document.createElement('a')
+        a1.href = csvHref
+        a1.text = `a1 csv`
+        a1.setAttribute('download', 'a1.csv')
+        const a2 = document.createElement('a')
+        a2.href = imgHref
+        a2.text = `a2 img`
+
+        container.appendChild(a1)
+        container.appendChild(a2)
+      }catch(e) {
+        console.warn(e)
+      }
+    })
+  }
 
   for (const list of kgDsLists){
     list.addEventListener('kgDsPrvUpdated', ({ detail }) => {
@@ -70,6 +98,7 @@
 
     for (const prvs of kgDsPrvs){
       prvs.setAttribute('kg-ds-prv-darkmode', checked)
+      prvs.getDownloadPreviewHref()
     }
 
     if (checked) {

@@ -13,6 +13,26 @@
 | `dataProp` | `kg-ds-prv-chartjs-data` |             | `string`  | `undefined` |
 
 
+## Events
+
+| Event            | Description | Type               |
+| ---------------- | ----------- | ------------------ |
+| `kgDsPrvUpdated` |             | `CustomEvent<any>` |
+
+
+## Methods
+
+### `getHrefUrl() => Promise<unknown>`
+
+
+
+#### Returns
+
+Type: `Promise<unknown>`
+
+
+
+
 ## Dependencies
 
 ### Used by

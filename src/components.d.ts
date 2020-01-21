@@ -24,12 +24,16 @@ export namespace Components {
     'backendUrl': string;
     'darkmode': boolean;
     'filename': string;
+    'getDownloadCsvHref': () => Promise<string>;
+    'getDownloadPreviewHref': () => Promise<unknown>;
     'kgId': string;
     'kgSchema': string;
   }
   interface KgDatasetPreviewerChart {
     'darkmode': boolean;
     'dataProp': string;
+    'getCsvUrl': () => Promise<string>;
+    'getHrefUrl': () => Promise<unknown>;
   }
 }
 
@@ -75,10 +79,12 @@ declare namespace LocalJSX {
     'filename'?: string;
     'kgId'?: string;
     'kgSchema'?: string;
+    'onRenderEvent'?: (event: CustomEvent<any>) => void;
   }
   interface KgDatasetPreviewerChart {
     'darkmode'?: boolean;
     'dataProp'?: string;
+    'onKgDsPrvUpdated'?: (event: CustomEvent<any>) => void;
   }
 
   interface IntrinsicElements {

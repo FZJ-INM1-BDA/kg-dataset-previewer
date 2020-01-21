@@ -16,6 +16,26 @@
 | `kgSchema`       | `kg-ds-prv-kg-schema`       |             | `string` | ``minds/core/dataset/v1.0.0``      |
 
 
+## Events
+
+| Event            | Description | Type               |
+| ---------------- | ----------- | ------------------ |
+| `kgDsPrvUpdated` |             | `CustomEvent<any>` |
+
+
+## Methods
+
+### `getDatasetFiles() => Promise<IDatasetFile[]>`
+
+
+
+#### Returns
+
+Type: `Promise<IDatasetFile[]>`
+
+
+
+
 ## Dependencies
 
 ### Depends on
