@@ -38,11 +38,12 @@ export class KgDatasetPreviewer {
   private filterCriteria: string[] = []
 
   @Watch('filterCriteriaProp')
-  filterCriteriaChanged(criteriaString:string){
+  filterCriteriaChanged(){
+    if (!this.filterCriteriaProp) return
     try {
-      const parsed = JSON.parse(criteriaString)
-      if (!Array.isArray(parsed)) throw new Error(`kg-ds-prv-filter-criteria must be a stringified Array: ${criteriaString}`)
-      if (!parsed.every(entry => typeof entry === 'string')) throw new Error(`every entry of kg-ds-prv-filter-criteria must be a string ${criteriaString}`)
+      const parsed = JSON.parse(this.filterCriteriaProp)
+      if (!Array.isArray(parsed)) throw new Error(`kg-ds-prv-filter-criteria must be a stringified Array: ${this.filterCriteriaProp}`)
+      if (!parsed.every(entry => typeof entry === 'string')) throw new Error(`every entry of kg-ds-prv-filter-criteria must be a string ${this.filterCriteriaProp}`)
       this.filterCriteria = parsed
     } catch (e) {
       throw e
@@ -119,6 +120,7 @@ export class KgDatasetPreviewer {
   }
 
   constructor() {
+    this.filterCriteriaChanged()
     this.fetchKgIdInfo()
     this.reGetRenderListfn()
   }
