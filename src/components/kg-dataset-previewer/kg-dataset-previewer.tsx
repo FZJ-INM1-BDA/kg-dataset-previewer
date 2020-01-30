@@ -2,9 +2,9 @@ import { Component, Prop, h, Watch, State, Method, Element, Event, EventEmitter 
 import { KG_DATASET_PREVIEWER_BACKEND_URL } from '../../utils/utils'
 import { IDatasetFile, getRenderFunction, prependUrl } from '../../utils/renderUtil'
 
-
 @Component({
-  tag: 'kg-dataset-previewer'
+  tag: 'kg-dataset-previewer',
+  styleUrl: 'kg-dataset-previewer.css'
 })
 export class KgDatasetPreviewer {
 

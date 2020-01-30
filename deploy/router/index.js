@@ -2,6 +2,7 @@ const express = require('express')
 const fs = require('fs')
 const path = require('path')
 const pathToPreviewData = path.resolve(__dirname, '../data/shapedPreviewData.json')
+const { getFilterPreviewFn } = require('./util')
 
 let list = []
 fs.readFile(pathToPreviewData, 'utf-8', (err, data) => {
@@ -33,10 +34,24 @@ router.get('/:datasetId/:qFilename', (req, res) => {
 })
 
 router.get('/:datasetId', (req, res) => {
+  const { filterBy } = req.query
+
+  let parsedFilterBy
+  try {
+    parsedFilterBy = filterBy && JSON.parse(filterBy)
+  } catch (e) {
+    return res.status(400).send(`filterBy needs to be URL encoded array of strings`)
+  }
+
   const { datasetId } = req.params
   const r = getFiles({ datasetId })
-  if (r) res.status(200).json(r)
-  else res.status(404).end()
+  if (!r) return res.status(404).end()
+
+  if (!filterBy) return res.status(200).json(r)
+  
+  res.status(200).json(
+    r.filter(getFilterPreviewFn(parsedFilterBy))
+  )
 })
 
 router.get('/', (req, res) => {

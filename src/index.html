@@ -8,14 +8,21 @@
   <script type="module" src="/build/kg-dataset-previewer.esm.js"></script>
   <script nomodule src="/build/kg-dataset-previewer.js"></script>
   <style>
-    html, body, #container
+    html, body, .container
     {
       width: 100%;
       height: 100%;
       display: block;
     }
 
-    #container
+    .container
+    {
+      width: 100%;
+      display: flex!important;
+      flex-direction: column;
+    }
+
+    .row
     {
       display: flex!important;
       flex-direction: row;
@@ -27,32 +34,42 @@
     <input type="checkbox" id="darkmode-checkbox">darkmode
   </label>
   
-  <div id="container">
+  <div class="container">
+    <div class="row">
 
-    <kg-dataset-list
-      kg-ds-prv-container-class="ul-container test-container"
-      kg-ds-prv-item-class="item-class"
-      kg-ds-prv-kg-id="cb875c0d-97f4-4dbc-a9ce-472d8ba58c99">
-    
-    </kg-dataset-list>
+      <kg-dataset-previewer
+        style="display:block; width: 500px; height: 500px;"
+        kg-ds-prv-kg-id="cb875c0d-97f4-4dbc-a9ce-472d8ba58c99"
+        kg-ds-prv-filename="α₁(NA)/profile">
+      </kg-dataset-previewer>
+      <kg-dataset-previewer
+        style="display:block; width: 500px; height: 500px;"
+        kg-ds-prv-kg-id="e715e1f7-2079-45c4-a67f-f76b102acfce"
+        kg-ds-prv-filename="fingerprint">
+      </kg-dataset-previewer>
+    </div>
 
-    <kg-dataset-previewer
-      kg-ds-prv-kg-id="cb875c0d-97f4-4dbc-a9ce-472d8ba58c99"
-      kg-ds-prv-filename="5-HT₂(5-HT)/autoradiography">
-    </kg-dataset-previewer>
-    <kg-dataset-previewer
-      style="display:block; width: 500px; height: 500px;"
-      kg-ds-prv-kg-id="cb875c0d-97f4-4dbc-a9ce-472d8ba58c99"
-      kg-ds-prv-filename="α₁(NA)/profile">
-    </kg-dataset-previewer>
-    <kg-dataset-previewer
-      style="display:block; width: 500px; height: 500px;"
-      kg-ds-prv-kg-id="e715e1f7-2079-45c4-a67f-f76b102acfce"
-      kg-ds-prv-filename="fingerprint">
-    </kg-dataset-previewer>
-  </div>
-  <div id="btn-container">
+    <div class="row">
 
+      <kg-dataset-list
+        kg-ds-prv-container-class="ul-container test-container"
+        kg-ds-prv-item-class="item-class"
+        kg-ds-prv-kg-id="cb875c0d-97f4-4dbc-a9ce-472d8ba58c99">
+      
+      </kg-dataset-list>
+
+      <kg-dataset-previewer
+        style="width: 800px; border:1px black solid;"
+        kg-ds-prv-kg-id="cb875c0d-97f4-4dbc-a9ce-472d8ba58c99"
+        kg-ds-prv-filename="5-HT₂(5-HT)/autoradiography">
+      </kg-dataset-previewer>
+    </div>
+    <div class="row">
+
+      <div id="btn-container">
+
+      </div>
+    </div>
   </div>
 </body>
 <script>

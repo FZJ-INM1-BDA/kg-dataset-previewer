@@ -6,4 +6,4 @@ const app = require('express')()
 app.use(require('cors')())
 app.use('/datasetPreview', router)
 
-app.listen(PORT, () => console.log('app listening'))
+app.listen(PORT, () => console.log(`app listening on port ${PORT}`))
