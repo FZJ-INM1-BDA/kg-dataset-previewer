@@ -15,6 +15,7 @@ export namespace Components {
   interface KgDatasetList {
     'backendUrl': string;
     'containerClass': string;
+    'filterCriteriaProp': string;
     'getDatasetFiles': () => Promise<IDatasetFile[]>;
     'itemClass': string;
     'kgId': string;
@@ -68,6 +69,7 @@ declare namespace LocalJSX {
   interface KgDatasetList {
     'backendUrl'?: string;
     'containerClass'?: string;
+    'filterCriteriaProp'?: string;
     'itemClass'?: string;
     'kgId'?: string;
     'kgSchema'?: string;

@@ -4,8 +4,8 @@ import Chart, { ChartConfiguration, ChartOptions, ChartData } from 'chart.js'
 export const KG_DATASET_PREVIEWER_BACKEND_URL = `__BACKEND_URL__`
 export const KG_DATASET_PREFIX = `kg-ds-prv`
 
-export function getKgInfo({ kgId, backendUrl }) {
-  return fetch(`${backendUrl}/${kgId}`).then(res => res.json())
+export function getKgInfo({ kgId, backendUrl, searchParam = new URLSearchParams() }) {
+  return fetch(`${backendUrl}/${kgId}?${searchParam.toString()}`).then(res => res.json())
 }
 
 export const MIME_TYPE = {

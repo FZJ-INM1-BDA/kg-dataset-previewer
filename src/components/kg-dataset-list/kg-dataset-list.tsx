@@ -30,6 +30,25 @@ export class KgDatasetPreviewer {
   })
   itemClass: string = ''
 
+  @Prop({
+    attribute: 'kg-ds-prv-filter-criteria'
+  })
+  filterCriteriaProp: string
+
+  private filterCriteria: string[] = []
+
+  @Watch('filterCriteriaProp')
+  filterCriteriaChanged(criteriaString:string){
+    try {
+      const parsed = JSON.parse(criteriaString)
+      if (!Array.isArray(parsed)) throw new Error(`kg-ds-prv-filter-criteria must be a stringified Array: ${criteriaString}`)
+      if (!parsed.every(entry => typeof entry === 'string')) throw new Error(`every entry of kg-ds-prv-filter-criteria must be a string ${criteriaString}`)
+      this.filterCriteria = parsed
+    } catch (e) {
+      throw e
+    }
+  }
+
   @Method() 
   async getDatasetFiles() {
     return this.datasetFiles
@@ -60,15 +79,27 @@ export class KgDatasetPreviewer {
      })
   }
 
+  getSearchParam(){
+    if (!this.filterCriteria || this.filterCriteria.length === 0) return null
+    const search = new URLSearchParams()
+    search.set('filterBy', JSON.stringify(this.filterCriteria))
+    return search
+  }
 
   fetchKgIdInfo(){
 
     if (this.kgId) {
       
       this.loadingFlag = true
+
+      const searchParam = this.getSearchParam()
+      
       getKgInfo({
         kgId: this.kgId,
-        backendUrl: this.backendUrl
+        backendUrl: this.backendUrl,
+        ...(
+          searchParam ? { searchParam } : {}
+        )
       })
         .then(arr => {
           this.datasetFiles = arr
