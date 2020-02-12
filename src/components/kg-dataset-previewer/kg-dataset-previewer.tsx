@@ -34,7 +34,8 @@ export class KgDatasetPreviewer {
   }) darkmode: boolean = false
 
   loadingFlag: boolean = false
-  error: string
+
+  @State() error: string
   @State() displayFile: IDatasetFile
   @State() renderFn: Function = getRenderFunction({ darkmode: this.darkmode })
 
@@ -87,8 +88,13 @@ export class KgDatasetPreviewer {
     }
 
     this.loadingFlag = true
-    fetch(`${this.backendUrl}/${encodeURIComponent(this.kgId)}/${encodeURIComponent(this.filename)}`)
-      .then(res => res.json())
+    const fetchingMoreInfoUrl = `${this.backendUrl}/${encodeURIComponent(this.kgId)}/${encodeURIComponent(this.filename)}`
+    fetch(fetchingMoreInfoUrl)
+      .then(res => {
+        const { status, statusText } = res
+        if (status >= 400) throw new Error(statusText)
+        return res.json()
+      })
       .then(json => {
         const { url } = json
         this.displayFile = {
@@ -117,7 +123,7 @@ export class KgDatasetPreviewer {
   render() {
     setTimeout(this.renderEvent.emit)
     return this.error
-      ? <span>{this.error}</span>
+      ? <span>{this.filename}<br/>{this.error}</span>
       : this.loadingFlag
         ? <span>Loading ...</span>
         : this.renderFn(this.displayFile)

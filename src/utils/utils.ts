@@ -11,7 +11,8 @@ export function getKgInfo({ kgId, backendUrl, searchParam = new URLSearchParams(
 export const MIME_TYPE = {
   NIFTI: 'application/nifti',
   JPEG: 'image/jpeg',
-  JSON: 'application/json'
+  JSON: 'application/json',
+  HIBOP: 'application/hibop'
 }
 
 const KG_PREVIEW_DS_PATCH_CHARTJS = Symbol(`KG_PREVIEW_DS_PATCH_CHARTJS`)
