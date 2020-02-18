@@ -25,6 +25,16 @@
 
 ## Methods
 
+### `getDownloadCsvHref() => Promise<string>`
+
+
+
+#### Returns
+
+Type: `Promise<string>`
+
+
+
 ### `getDownloadPreviewHref() => Promise<unknown>`
 
 

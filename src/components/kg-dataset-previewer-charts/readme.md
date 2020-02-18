@@ -22,6 +22,16 @@
 
 ## Methods
 
+### `getCsvUrl() => Promise<string>`
+
+
+
+#### Returns
+
+Type: `Promise<string>`
+
+
+
 ### `getHrefUrl() => Promise<unknown>`
 
 
