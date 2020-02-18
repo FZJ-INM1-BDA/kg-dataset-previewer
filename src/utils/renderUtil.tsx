@@ -35,10 +35,9 @@ export function getRenderFunction({ itemClass, darkmode = false }: {itemClass?: 
       }
       case MIME_TYPE.JSON: {
         return <kg-dataset-previewer-chart
-          kg-ds-prv-darkmode={darkmode}
           style={{width: '100%', height: '100%', display: 'block'}}
-          kg-ds-prv-chartjs-data={JSON.stringify(data)}>
-        </kg-dataset-previewer-chart>
+          darkmode={darkmode}
+          dataProp={JSON.stringify(data)} />
       }
       case MIME_TYPE.HIBOP: {
         const { url, filename } = datafile
