@@ -33,6 +33,6 @@
   "dependencies": {},
   "repository": {
     "type" : "git",
-    "url" : "https://github.com/FZJ-INM1-BDA/hbp-dataset-previewer.git"
+    "url" : "https://github.com/FZJ-INM1-BDA/kg-dataset-previewer.git"
   }
 }
