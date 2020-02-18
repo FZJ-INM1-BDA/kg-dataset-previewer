@@ -120,6 +120,7 @@ export class KgPreviewChart{
   }
 
   protected setConfigData(){
+    if (!this.dataProp) return
     this.data = JSON.parse(this.dataProp)
     this.renderChart()
   }
