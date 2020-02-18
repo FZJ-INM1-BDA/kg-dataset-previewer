@@ -19,7 +19,7 @@ export class KgPreviewChart{
 
   @Prop({
     attribute: 'kg-ds-prv-chartjs-data',
-    reflect: false,
+    reflect: true,
     mutable: false
   }) dataProp: string
 
