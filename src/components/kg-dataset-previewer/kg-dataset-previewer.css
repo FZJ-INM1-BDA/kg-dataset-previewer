@@ -4,3 +4,10 @@ kg-dataset-previewer
   align-items: center;
   justify-content: center;
 }
+
+.img-container-cls
+{
+  width: 100%;
+  height: 100%;
+  background-size: contain;
+}
