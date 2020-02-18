@@ -31,7 +31,7 @@ export function getRenderFunction({ itemClass, darkmode = false }: {itemClass?: 
         return <span class={itemClass}>nifti can be visited at: {url}</span>
       }
       case MIME_TYPE.JPEG: {
-        return <div class={itemClass + ' img-container-cls'} style={{background: `url('${url}') center center / contain no-repeat`}} data-img-src={url}></div>
+        return <div class={(itemClass || '') + ' img-container-cls'} style={{background: `url('${url}') center center / contain no-repeat`}} data-img-src={url}></div>
       }
       case MIME_TYPE.JSON: {
         return <kg-dataset-previewer-chart
