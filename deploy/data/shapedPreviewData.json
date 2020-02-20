@@ -1,5 +1,1271 @@
 [
   [
+    "19d1f3bd-8825-4baf-863f-97393d03ef28",
+    [
+      {
+        "name": "Receptor density fingerprint of Area TE 2 (STG)",
+        "filename": "fingerprint",
+        "mimetype": "application/json",
+        "data": {
+          "chart.js": {
+            "type": "radar",
+            "options": {
+              "responsive": true,
+              "legend": {
+                "display": true
+              },
+              "title": {
+                "display": true,
+                "text": "Receptor density fingerprint Area TE 2 (STG) (fmol/mg protein)"
+              },
+              "scale": {
+                "ticks": {
+                  "showLabelBackdrop": false
+                }
+              }
+            },
+            "data": {
+              "labels": [],
+              "datasets": [
+                {
+                  "label": "mean",
+                  "data": [],
+                  "backgroundColor": "rgba(255,255,255,0.2)"
+                },
+                {
+                  "label": "mean_sd",
+                  "data": []
+                }
+              ]
+            }
+          }
+        },
+        "referenceSpaces": [
+          {
+            "name": "*",
+            "fullId": "*"
+          }
+        ]
+      }
+    ]
+  ],
+  [
+    "1a19693d-d99f-4789-b1ae-8ab5f0bb6432",
+    [
+      {
+        "name": "Receptor density fingerprint of CA (Hippocampus), stratum moleculare",
+        "filename": "fingerprint",
+        "mimetype": "application/json",
+        "data": {
+          "chart.js": {
+            "type": "radar",
+            "options": {
+              "responsive": true,
+              "legend": {
+                "display": true
+              },
+              "title": {
+                "display": true,
+                "text": "Receptor density fingerprint CA (Hippocampus), stratum moleculare (fmol/mg protein)"
+              },
+              "scale": {
+                "ticks": {
+                  "showLabelBackdrop": false
+                }
+              }
+            },
+            "data": {
+              "labels": [
+                "AMPA",
+                "kainate",
+                "NMDA",
+                "GABAᴀ",
+                "GABAᴃ"
+              ],
+              "datasets": [
+                {
+                  "label": "mean",
+                  "data": [
+                    332.8803,
+                    1075.45996666667,
+                    270.0726,
+                    658.998722222222,
+                    1720.25116666667
+                  ],
+                  "backgroundColor": "rgba(255,255,255,0.2)"
+                },
+                {
+                  "label": "mean_sd",
+                  "data": [
+                    107.06350753443,
+                    180.510944331417,
+                    101.843129364675,
+                    224.513420082352,
+                    400.255468416741
+                  ]
+                }
+              ]
+            }
+          }
+        },
+        "referenceSpaces": [
+          {
+            "name": "*",
+            "fullId": "*"
+          }
+        ]
+      }
+    ]
+  ],
+  [
+    "1fb699d0-b678-4ad9-ae10-1090e8a1a7aa",
+    [
+      {
+        "name": "Receptor density fingerprint of CA (Hippocampus), stratum cellulare ",
+        "filename": "fingerprint",
+        "mimetype": "application/json",
+        "data": {
+          "chart.js": {
+            "type": "radar",
+            "options": {
+              "responsive": true,
+              "legend": {
+                "display": true
+              },
+              "title": {
+                "display": true,
+                "text": "Receptor density fingerprint CA (Hippocampus), stratum cellulare  (fmol/mg protein)"
+              },
+              "scale": {
+                "ticks": {
+                  "showLabelBackdrop": false
+                }
+              }
+            },
+            "data": {
+              "labels": [
+                "AMPA",
+                "kainate",
+                "NMDA",
+                "GABAᴀ",
+                "GABAᴃ"
+              ],
+              "datasets": [
+                {
+                  "label": "mean",
+                  "data": [
+                    498.021844444444,
+                    1365.69708888889,
+                    365.861288888889,
+                    789.245111111111,
+                    1961.14446666667
+                  ],
+                  "backgroundColor": "rgba(255,255,255,0.2)"
+                },
+                {
+                  "label": "mean_sd",
+                  "data": [
+                    120.061528258953,
+                    273.429391930039,
+                    126.509759281571,
+                    362.245307832498,
+                    397.47788761822
+                  ]
+                }
+              ]
+            }
+          }
+        },
+        "referenceSpaces": [
+          {
+            "name": "*",
+            "fullId": "*"
+          }
+        ]
+      }
+    ]
+  ],
+  [
+    "3978c6b4-808a-48e4-be24-7d327565f5f6",
+    [
+      {
+        "name": "Receptor density fingerprint of Area 47",
+        "filename": "fingerprint",
+        "mimetype": "application/json",
+        "data": {
+          "chart.js": {
+            "type": "radar",
+            "options": {
+              "responsive": true,
+              "legend": {
+                "display": true
+              },
+              "title": {
+                "display": true,
+                "text": "Receptor density fingerprint Area 47 (fmol/mg protein)"
+              },
+              "scale": {
+                "ticks": {
+                  "showLabelBackdrop": false
+                }
+              }
+            },
+            "data": {
+              "labels": [
+                "AMPA (Glu)",
+                "kainate (Glu)",
+                "NMDA (Glu)",
+                "mGluR2/3 (Glu)",
+                "GABAA(GABA)",
+                "GABAB(GABA)",
+                "GABAA(BZ)",
+                "M1(ACh)",
+                "M2(ACh)",
+                "M3(ACh)",
+                "α4β2(ACh)",
+                "α1(NA)",
+                "α2(NA)",
+                "5-HT1A(5-HT)",
+                "5-HT2(5-HT)",
+                "D1(DA)"
+              ],
+              "datasets": [
+                {
+                  "label": "mean",
+                  "data": [
+                    688.583066666667,
+                    585.811766666667,
+                    1032.63823333333,
+                    "NA",
+                    1534.73083333333,
+                    2722.55953333333,
+                    2657.82973333333,
+                    725.0157,
+                    197.539366666667,
+                    639.71505,
+                    89.3168,
+                    307.562966666667,
+                    193.1685,
+                    505.461866666667,
+                    365.9586,
+                    70.7881666666667
+                  ],
+                  "backgroundColor": "rgba(255,255,255,0.2)"
+                },
+                {
+                  "label": "mean_sd",
+                  "data": [
+                    335,
+                    267,
+                    818,
+                    "NA",
+                    920,
+                    923,
+                    1130,
+                    388,
+                    119,
+                    89,
+                    15,
+                    124,
+                    114,
+                    208,
+                    163,
+                    13
+                  ]
+                }
+              ]
+            }
+          }
+        },
+        "referenceSpaces": [
+          {
+            "name": "*",
+            "fullId": "*"
+          }
+        ]
+      }
+    ]
+  ],
+  [
+    "442e2386-0518-42b6-95ff-77cb1b3c14de",
+    [
+      {
+        "name": "Receptor density fingerprint of Mediodorsal Thalamic Nucleus",
+        "filename": "fingerprint",
+        "mimetype": "application/json",
+        "data": {
+          "chart.js": {
+            "type": "radar",
+            "options": {
+              "responsive": true,
+              "legend": {
+                "display": true
+              },
+              "title": {
+                "display": true,
+                "text": "Receptor density fingerprint Mediodorsal Thalamic Nucleus (fmol/mg protein)"
+              },
+              "scale": {
+                "ticks": {
+                  "showLabelBackdrop": false
+                }
+              }
+            },
+            "data": {
+              "labels": [
+                "AMPA (Glu)",
+                "kainate (Glu)",
+                "NMDA (Glu)",
+                "mGluR2/3 (Glu)",
+                "GABAA(GABA)",
+                "GABAB(GABA)",
+                "GABAA(BZ)",
+                "M1(ACh)",
+                "M2(ACh)",
+                "M3(ACh)",
+                "α4β2(ACh)",
+                "α1(NA)",
+                "α2(NA)",
+                "5-HT1A(5-HT)",
+                "5-HT2(5-HT)",
+                "D1(DA)"
+              ],
+              "datasets": [
+                {
+                  "label": "mean",
+                  "data": [
+                    249.582,
+                    354.5955,
+                    958.84075,
+                    "NA",
+                    387.197,
+                    1992.16375,
+                    1015.31425,
+                    217.445,
+                    587.961,
+                    254.2455,
+                    144.49625,
+                    933.42975,
+                    82.8205,
+                    64.261,
+                    216.799,
+                    18.6195
+                  ],
+                  "backgroundColor": "rgba(255,255,255,0.2)"
+                },
+                {
+                  "label": "mean_sd",
+                  "data": [
+                    141.021053733122,
+                    291.529400793471,
+                    229.289311334502,
+                    "NA",
+                    100.985943648939,
+                    888.540905261495,
+                    46.7582743649007,
+                    123.095304576034,
+                    228.365287181159,
+                    40.6043848083759,
+                    23.7863820196206,
+                    763.550655449645,
+                    56.8119497435765,
+                    40.2759581470965,
+                    128.531311591119,
+                    3.48722549696269
+                  ]
+                }
+              ]
+            }
+          }
+        },
+        "referenceSpaces": [
+          {
+            "name": "*",
+            "fullId": "*"
+          }
+        ]
+      }
+    ]
+  ],
+  [
+    "44b18447-01ee-42fe-a989-8af1d37516fe",
+    [
+      {
+        "name": "Receptor density fingerprint of CA3 (Hippocampus)",
+        "filename": "fingerprint",
+        "mimetype": "application/json",
+        "data": {
+          "chart.js": {
+            "type": "radar",
+            "options": {
+              "responsive": true,
+              "legend": {
+                "display": true
+              },
+              "title": {
+                "display": true,
+                "text": "Receptor density fingerprint CA3 (Hippocampus) (fmol/mg protein)"
+              },
+              "scale": {
+                "ticks": {
+                  "showLabelBackdrop": false
+                }
+              }
+            },
+            "data": {
+              "labels": [
+                "AMPA",
+                "kainate",
+                "NMDA",
+                "GABAᴀ",
+                "GABAᴃ"
+              ],
+              "datasets": [
+                {
+                  "label": "mean",
+                  "data": [
+                    426.0077,
+                    1225.2598,
+                    399.286433333333,
+                    575.5131,
+                    1929.90673333333
+                  ],
+                  "backgroundColor": "rgba(255,255,255,0.2)"
+                },
+                {
+                  "label": "mean_sd",
+                  "data": [
+                    76.3504541554927,
+                    218.064966653037,
+                    117.930434189709,
+                    142.599064564008,
+                    360.28529784728
+                  ]
+                }
+              ]
+            }
+          }
+        },
+        "referenceSpaces": [
+          {
+            "name": "*",
+            "fullId": "*"
+          }
+        ]
+      }
+    ]
+  ],
+  [
+    "4586e765-404f-4fdf-add5-d93ec09378bc",
+    [
+      {
+        "name": "Receptor density fingerprint of Anterior Thalamic Nucleus",
+        "filename": "fingerprint",
+        "mimetype": "application/json",
+        "data": {
+          "chart.js": {
+            "type": "radar",
+            "options": {
+              "responsive": true,
+              "legend": {
+                "display": true
+              },
+              "title": {
+                "display": true,
+                "text": "Receptor density fingerprint Anterior Thalamic Nucleus (fmol/mg protein)"
+              },
+              "scale": {
+                "ticks": {
+                  "showLabelBackdrop": false
+                }
+              }
+            },
+            "data": {
+              "labels": [
+                "AMPA (Glu)",
+                "kainate (Glu)",
+                "NMDA (Glu)",
+                "mGluR2/3 (Glu)",
+                "GABAA(GABA)",
+                "GABAB(GABA)",
+                "GABAA(BZ)",
+                "M1(ACh)",
+                "M2(ACh)",
+                "M3(ACh)",
+                "α4β2(ACh)",
+                "α1(NA)",
+                "α2(NA)",
+                "5-HT1A(5-HT)",
+                "5-HT2(5-HT)",
+                "D1(DA)"
+              ],
+              "datasets": [
+                {
+                  "label": "mean",
+                  "data": [
+                    268.18775,
+                    274.095,
+                    1083.6795,
+                    "NA",
+                    538.67225,
+                    2041.82225,
+                    1052.98325,
+                    179.0625,
+                    663.041,
+                    271.3085,
+                    192.32825,
+                    1213.46825,
+                    77.068,
+                    57.10175,
+                    218.241,
+                    22.6835
+                  ],
+                  "backgroundColor": "rgba(255,255,255,0.2)"
+                },
+                {
+                  "label": "mean_sd",
+                  "data": [
+                    137.973126427758,
+                    189.033920146623,
+                    231.123355710755,
+                    "NA",
+                    133.073864870542,
+                    530.803409777025,
+                    232.399722438697,
+                    50.1899516404097,
+                    272.017099096117,
+                    53.5552653029249,
+                    9.14071223975463,
+                    1083.06738575904,
+                    60.1632415350104,
+                    31.5677152100581,
+                    127.223714573974,
+                    7.59536725028268
+                  ]
+                }
+              ]
+            }
+          }
+        },
+        "referenceSpaces": [
+          {
+            "name": "*",
+            "fullId": "*"
+          }
+        ]
+      }
+    ]
+  ],
+  [
+    "51adcf6b-a3e1-41a1-872b-33ab5bdc56a8",
+    [
+      {
+        "name": "Receptor density fingerprint of CA2 (Hippocampus)",
+        "filename": "fingerprint",
+        "mimetype": "application/json",
+        "data": {
+          "chart.js": {
+            "type": "radar",
+            "options": {
+              "responsive": true,
+              "legend": {
+                "display": true
+              },
+              "title": {
+                "display": true,
+                "text": "Receptor density fingerprint CA2 (Hippocampus) (fmol/mg protein)"
+              },
+              "scale": {
+                "ticks": {
+                  "showLabelBackdrop": false
+                }
+              }
+            },
+            "data": {
+              "labels": [
+                "AMPA",
+                "kainate",
+                "NMDA",
+                "GABAᴀ",
+                "GABAᴃ"
+              ],
+              "datasets": [
+                {
+                  "label": "mean",
+                  "data": [
+                    398.003366666667,
+                    1048.5118,
+                    303.691666666667,
+                    560.995466666667,
+                    1680.49343333333
+                  ],
+                  "backgroundColor": "rgba(255,255,255,0.2)"
+                },
+                {
+                  "label": "mean_sd",
+                  "data": [
+                    155.070908195068,
+                    83.5961885278868,
+                    96.6098025321102,
+                    181.235499549794,
+                    414.959738510935
+                  ]
+                }
+              ]
+            }
+          }
+        },
+        "referenceSpaces": [
+          {
+            "name": "*",
+            "fullId": "*"
+          }
+        ]
+      }
+    ]
+  ],
+  [
+    "675601ec-0bd0-4193-9085-cd1f6a9e9154",
+    [
+      {
+        "name": "Receptor density fingerprint of Globus Pallidus",
+        "filename": "fingerprint",
+        "mimetype": "application/json",
+        "data": {
+          "chart.js": {
+            "type": "radar",
+            "options": {
+              "responsive": true,
+              "legend": {
+                "display": true
+              },
+              "title": {
+                "display": true,
+                "text": "Receptor density fingerprint Globus Pallidus (fmol/mg protein)"
+              },
+              "scale": {
+                "ticks": {
+                  "showLabelBackdrop": false
+                }
+              }
+            },
+            "data": {
+              "labels": [
+                "AMPA (Glu)",
+                "kainate (Glu)",
+                "NMDA (Glu)",
+                "mGluR2/3 (Glu)",
+                "GABAA(GABA)",
+                "GABAB(GABA)",
+                "GABAA(BZ)",
+                "M1(ACh)",
+                "M2(ACh)",
+                "M3(ACh)",
+                "α4β2(ACh)",
+                "α1(NA)",
+                "α2(NA)",
+                "5-HT1A(5-HT)",
+                "5-HT2(5-HT)",
+                "D1(DA)"
+              ],
+              "datasets": [
+                {
+                  "label": "mean",
+                  "data": [
+                    98.36075,
+                    115.48675,
+                    439.22525,
+                    "NA",
+                    91.67475,
+                    247.24675,
+                    426.20425,
+                    118.67975,
+                    30.086,
+                    175.27675,
+                    16.52525,
+                    249.56875,
+                    54.65825,
+                    31.82525,
+                    148.28525,
+                    52.989
+                  ],
+                  "backgroundColor": "rgba(255,255,255,0.2)"
+                },
+                {
+                  "label": "mean_sd",
+                  "data": [
+                    56.7177975499461,
+                    108.44811081611,
+                    154.817385809594,
+                    "NA",
+                    13.7070992646147,
+                    141.54412367262,
+                    108.299359048196,
+                    62.4796318244327,
+                    10.0768168254332,
+                    92.6469455635209,
+                    6.88968201370717,
+                    215.518547504037,
+                    36.9928115573373,
+                    23.5598195716775,
+                    84.17939895792,
+                    38.3316045494228
+                  ]
+                }
+              ]
+            }
+          }
+        },
+        "referenceSpaces": [
+          {
+            "name": "*",
+            "fullId": "*"
+          }
+        ]
+      }
+    ]
+  ],
+  [
+    "68ae438a-d92f-4d51-9f33-4cd53ac94de3",
+    [
+      {
+        "name": "Receptor density fingerprint of Area TE 1 (HESCHL)",
+        "filename": "fingerprint",
+        "mimetype": "application/json",
+        "data": {
+          "chart.js": {
+            "type": "radar",
+            "options": {
+              "responsive": true,
+              "legend": {
+                "display": true
+              },
+              "title": {
+                "display": true,
+                "text": "Receptor density fingerprint Area TE 1 (HESCHL) (fmol/mg protein)"
+              },
+              "scale": {
+                "ticks": {
+                  "showLabelBackdrop": false
+                }
+              }
+            },
+            "data": {
+              "labels": [
+                "AMPA (Glu)",
+                "kainate (Glu)",
+                "NMDA (Glu)",
+                "mGluR2/3 (Glu)",
+                "GABAA(GABA)",
+                "GABAB(GABA)",
+                "GABAA(BZ)",
+                "M1(ACh)",
+                "M2(ACh)",
+                "M3(ACh)",
+                "α4β2(ACh)",
+                "α1(NA)",
+                "α2(NA)",
+                "5-HT1A(5-HT)",
+                "5-HT2(5-HT)",
+                "D1(DA)"
+              ],
+              "datasets": [
+                {
+                  "label": "mean",
+                  "data": [
+                    363.961768518518,
+                    372.473303703704,
+                    855.710357407407,
+                    2298.36476666667,
+                    1517.88376111111,
+                    1995.20382592593,
+                    2403.6575962963,
+                    458.836218518519,
+                    216.008796296296,
+                    910.288223809524,
+                    61.2688462962963,
+                    256.48807962963,
+                    644.399688888889,
+                    196.585759259259,
+                    344.046122222222,
+                    97.1221370370371
+                  ],
+                  "backgroundColor": "rgba(255,255,255,0.2)"
+                },
+                {
+                  "label": "mean_sd",
+                  "data": [
+                    76.8728087595205,
+                    89.6314833921567,
+                    200.207573902359,
+                    330.914375568842,
+                    281.204861865833,
+                    483.514631145903,
+                    658.29343094211,
+                    61.5491745246842,
+                    38.1020241758064,
+                    180.030873393938,
+                    30.2227198340294,
+                    89.8917943567539,
+                    122.949432416388,
+                    48.7678649792702,
+                    77.1141905253699,
+                    33.1538709807285
+                  ]
+                }
+              ]
+            }
+          }
+        },
+        "referenceSpaces": [
+          {
+            "name": "*",
+            "fullId": "*"
+          }
+        ]
+      }
+    ]
+  ],
+  [
+    "7ba7f2c3-0fa5-40a8-93b5-beb80295c88f",
+    [
+      {
+        "name": "Receptor density fingerprint of CA1 (Hippocampus)",
+        "filename": "fingerprint",
+        "mimetype": "application/json",
+        "data": {
+          "chart.js": {
+            "type": "radar",
+            "options": {
+              "responsive": true,
+              "legend": {
+                "display": true
+              },
+              "title": {
+                "display": true,
+                "text": "Receptor density fingerprint CA1 (Hippocampus) (fmol/mg protein)"
+              },
+              "scale": {
+                "ticks": {
+                  "showLabelBackdrop": false
+                }
+              }
+            },
+            "data": {
+              "labels": [
+                "AMPA",
+                "kainate",
+                "NMDA",
+                "GABAᴀ",
+                "GABAᴃ"
+              ],
+              "datasets": [
+                {
+                  "label": "mean",
+                  "data": [
+                    426.811066666667,
+                    1412.76276666667,
+                    243.926366666667,
+                    1063.13616666667,
+                    1914.27363333333
+                  ],
+                  "backgroundColor": "rgba(255,255,255,0.2)"
+                },
+                {
+                  "label": "mean_sd",
+                  "data": [
+                    135.281947884126,
+                    154.888079558897,
+                    103.927829747394,
+                    287.147591121297,
+                    509.502864793372
+                  ]
+                }
+              ]
+            }
+          }
+        },
+        "referenceSpaces": [
+          {
+            "name": "*",
+            "fullId": "*"
+          }
+        ]
+      }
+    ]
+  ],
+  [
+    "8956bb67-3ff3-40a2-960a-13232cc936c6",
+    [
+      {
+        "name": "Receptor density fingerprint of Area 9",
+        "filename": "fingerprint",
+        "mimetype": "application/json",
+        "data": {
+          "chart.js": {
+            "type": "radar",
+            "options": {
+              "responsive": true,
+              "legend": {
+                "display": true
+              },
+              "title": {
+                "display": true,
+                "text": "Receptor density fingerprint Area 9 (fmol/mg protein)"
+              },
+              "scale": {
+                "ticks": {
+                  "showLabelBackdrop": false
+                }
+              }
+            },
+            "data": {
+              "labels": [
+                "AMPA (Glu)",
+                "kainate (Glu)",
+                "NMDA (Glu)",
+                "mGluR2/3 (Glu)",
+                "GABAA(GABA)",
+                "GABAB(GABA)",
+                "GABAA(BZ)",
+                "M1(ACh)",
+                "M2(ACh)",
+                "M3(ACh)",
+                "α4β2(ACh)",
+                "α1(NA)",
+                "α2(NA)",
+                "5-HT1A(5-HT)",
+                "5-HT2(5-HT)",
+                "D1(DA)"
+              ],
+              "datasets": [
+                {
+                  "label": "mean",
+                  "data": [
+                    431.789174074074,
+                    659.697112037037,
+                    820.430809259259,
+                    4382.37429583333,
+                    1854.96262407407,
+                    2642.74510925926,
+                    2767.12231481482,
+                    494.900781481481,
+                    221.855222222222,
+                    938.659139814815,
+                    63.1055990740741,
+                    422.722881481482,
+                    624.227208333333,
+                    480.029487037037,
+                    448.585168518519,
+                    96.5504157407407
+                  ],
+                  "backgroundColor": "rgba(255,255,255,0.2)"
+                },
+                {
+                  "label": "mean_sd",
+                  "data": [
+                    175.04814102064,
+                    249.372816062167,
+                    382.967224182805,
+                    1436.34037373655,
+                    927.990262924279,
+                    662.701849573772,
+                    630.353028281635,
+                    327.199090818095,
+                    93.8555504723142,
+                    334.974226725662,
+                    38.829111609887,
+                    174.269229043792,
+                    113.712356961372,
+                    170.785675038386,
+                    209.174685461702,
+                    28.1844215555055
+                  ]
+                }
+              ]
+            }
+          }
+        },
+        "referenceSpaces": [
+          {
+            "name": "*",
+            "fullId": "*"
+          }
+        ]
+      }
+    ]
+  ],
+  [
+    "9b47cc3a-6eb4-431f-8a4e-e1a2aa01ab29",
+    [
+      {
+        "name": "Receptor density fingerprint of Area 46",
+        "filename": "fingerprint",
+        "mimetype": "application/json",
+        "data": {
+          "chart.js": {
+            "type": "radar",
+            "options": {
+              "responsive": true,
+              "legend": {
+                "display": true
+              },
+              "title": {
+                "display": true,
+                "text": "Receptor density fingerprint Area 46 (fmol/mg protein)"
+              },
+              "scale": {
+                "ticks": {
+                  "showLabelBackdrop": false
+                }
+              }
+            },
+            "data": {
+              "labels": [
+                "AMPA (Glu)",
+                "kainate (Glu)",
+                "NMDA (Glu)",
+                "mGluR2/3 (Glu)",
+                "GABAA(GABA)",
+                "GABAB(GABA)",
+                "GABAA(BZ)",
+                "M1(ACh)",
+                "M2(ACh)",
+                "M3(ACh)",
+                "α4β2(ACh)",
+                "α1(NA)",
+                "α2(NA)",
+                "5-HT1A(5-HT)",
+                "5-HT2(5-HT)",
+                "D1(DA)"
+              ],
+              "datasets": [
+                {
+                  "label": "mean",
+                  "data": [
+                    430.902812962963,
+                    570.610577777778,
+                    887.044711111111,
+                    4097.68536944444,
+                    1604.58127592593,
+                    2541.91821851852,
+                    2592.82926481481,
+                    374.777505555556,
+                    216.039303703704,
+                    1018.33631666667,
+                    53.8877888888889,
+                    386.18887037037,
+                    628.734733333333,
+                    436.774055555556,
+                    403.71832962963,
+                    103.416851851852
+                  ],
+                  "backgroundColor": "rgba(255,255,255,0.2)"
+                },
+                {
+                  "label": "mean_sd",
+                  "data": [
+                    171.755998689524,
+                    107.773412600057,
+                    361.67127016425,
+                    726.977664430385,
+                    520.155027592472,
+                    583.360572029703,
+                    759.888200427815,
+                    74.5946273542157,
+                    107.663576851321,
+                    370.981360488511,
+                    29.5992522229541,
+                    178.203864239208,
+                    151.881589190239,
+                    145.143331728053,
+                    113.833973427429,
+                    46.898507262681
+                  ]
+                }
+              ]
+            }
+          }
+        },
+        "referenceSpaces": [
+          {
+            "name": "*",
+            "fullId": "*"
+          }
+        ]
+      }
+    ]
+  ],
+  [
+    "bc4afd13-3cc1-46cd-a8c1-e54151afe020",
+    [
+      {
+        "name": "Receptor density fingerprint of Putamen",
+        "filename": "fingerprint",
+        "mimetype": "application/json",
+        "data": {
+          "chart.js": {
+            "type": "radar",
+            "options": {
+              "responsive": true,
+              "legend": {
+                "display": true
+              },
+              "title": {
+                "display": true,
+                "text": "Receptor density fingerprint Putamen (fmol/mg protein)"
+              },
+              "scale": {
+                "ticks": {
+                  "showLabelBackdrop": false
+                }
+              }
+            },
+            "data": {
+              "labels": [
+                "AMPA (Glu)",
+                "kainate (Glu)",
+                "NMDA (Glu)",
+                "mGluR2/3 (Glu)",
+                "GABAA(GABA)",
+                "GABAB(GABA)",
+                "GABAA(BZ)",
+                "M1(ACh)",
+                "M2(ACh)",
+                "M3(ACh)",
+                "α4β2(ACh)",
+                "α1(NA)",
+                "α2(NA)",
+                "5-HT1A(5-HT)",
+                "5-HT2(5-HT)",
+                "D1(DA)"
+              ],
+              "datasets": [
+                {
+                  "label": "mean",
+                  "data": [
+                    631.9658,
+                    1331.7008,
+                    869.1738,
+                    "NA",
+                    787.9226,
+                    1603.66,
+                    646.5902,
+                    822.5952,
+                    733.95,
+                    692.13875,
+                    176.085,
+                    441.7424,
+                    100.4102,
+                    421.6258,
+                    449.54,
+                    251.871
+                  ],
+                  "backgroundColor": "rgba(255,255,255,0.2)"
+                },
+                {
+                  "label": "mean_sd",
+                  "data": [
+                    541.98583532478,
+                    1752.90909430686,
+                    397.617692509652,
+                    "NA",
+                    506.658430360435,
+                    1524.24239456722,
+                    352.310981409464,
+                    531.069647540414,
+                    658.041637575085,
+                    288.453258842601,
+                    222.314809598911,
+                    320.659328943974,
+                    83.3636046677445,
+                    830.236932096615,
+                    323.93223635739,
+                    179.96998578513
+                  ]
+                }
+              ]
+            }
+          }
+        },
+        "referenceSpaces": [
+          {
+            "name": "*",
+            "fullId": "*"
+          }
+        ]
+      }
+    ]
+  ],
+  [
+    "f95b8ec7-9794-473c-aef7-302103b737c6",
+    [
+      {
+        "name": "Receptor density fingerprint of DG (Hippocampus)",
+        "filename": "fingerprint",
+        "mimetype": "application/json",
+        "data": {
+          "chart.js": {
+            "type": "radar",
+            "options": {
+              "responsive": true,
+              "legend": {
+                "display": true
+              },
+              "title": {
+                "display": true,
+                "text": "Receptor density fingerprint DG (Hippocampus) (fmol/mg protein)"
+              },
+              "scale": {
+                "ticks": {
+                  "showLabelBackdrop": false
+                }
+              }
+            },
+            "data": {
+              "labels": [
+                "AMPA",
+                "kainate",
+                "NMDA",
+                "GABAᴀ",
+                "GABAᴃ"
+              ],
+              "datasets": [
+                {
+                  "label": "mean",
+                  "data": [
+                    458.528133333333,
+                    1359.59573333333,
+                    293.2782,
+                    1043.30423333333,
+                    2183.01743333333
+                  ],
+                  "backgroundColor": "rgba(255,255,255,0.2)"
+                },
+                {
+                  "label": "mean_sd",
+                  "data": [
+                    130.562029828941,
+                    151.885738705197,
+                    88.7460705135163,
+                    277.424857664275,
+                    637.519211321246
+                  ]
+                }
+              ]
+            }
+          }
+        },
+        "referenceSpaces": [
+          {
+            "name": "*",
+            "fullId": "*"
+          }
+        ]
+      }
+    ]
+  ],
+  [
     "7e227fef-dc93-4593-a0ea-707996992dd8",
     [
       {
