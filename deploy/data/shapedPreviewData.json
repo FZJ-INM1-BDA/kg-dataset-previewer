@@ -1,5 +1,75 @@
 [
   [
+    "b08a7dbc-7c75-4ce7-905b-690b2b1e8957",
+    [
+      {
+        "name": "Overlay of data modalities",
+        "filename": "Overlay of data modalities",
+        "mimetype": "application/json",
+        "data": {
+          "iav-registered-volumes": {
+            "volumes": [
+              {
+                "name": "PLI Fiber Orientation Red Channel",
+                "source": "precomputed://https://zam10143.zam.kfa-juelich.de/chumni/nifti/8b970e20de0e31b1b78ec9dba13d20319111189711983cb03ddbb7cc/BI-FOM-HSV_R",
+                "shader": "void main(){ float x = toNormalized(getDataValue()); if (x < 0.1) { emitTransparent(); } else { emitRGB(vec3(1.0 * x, x * 0., 0. * x )); } }",
+                "transform": [[0.7400000095367432, 0, 0, 11020745], [0, 0.2653011679649353, -0.6908077001571655, 2533286.5], [0, 0.6908077001571655, 0.2653011679649353, -32682974], [0, 0, 0, 1]],
+                "opacity": 1.0
+              },
+              {
+                "name": "PLI Fiber Orientation Green Channel",
+                "source": "precomputed://https://zam10143.zam.kfa-juelich.de/chumni/nifti/8b970e20de0e31b1b78ec9dba13d20319111189711983cb03ddbb7cc/BI-FOM-HSV_G",
+                "shader": "void main(){ float x = toNormalized(getDataValue()); if (x < 0.1) { emitTransparent(); } else { emitRGB(vec3(0. * x, x * 1., 0. * x )); } }",
+                "transform": [[0.7400000095367432, 0, 0, 11020745], [0, 0.2653011679649353, -0.6908077001571655, 2533286.5], [0, 0.6908077001571655, 0.2653011679649353, -32682974], [0, 0, 0, 1]],
+                "opacity": 0.5
+              },
+              {
+                "name": "PLI Fiber Orientation Blue Channel",
+                "source": "precomputed://https://zam10143.zam.kfa-juelich.de/chumni/nifti/8b970e20de0e31b1b78ec9dba13d20319111189711983cb03ddbb7cc/BI-FOM-HSV_B",
+                "shader": "void main(){ float x = toNormalized(getDataValue()); if (x < 0.1) { emitTransparent(); } else { emitRGB(vec3(0. * x, x * 0., 1.0 * x )); } }",
+                "transform": [[0.7400000095367432, 0, 0, 11020745], [0, 0.2653011679649353, -0.6908077001571655, 2533286.5], [0, 0.6908077001571655, 0.2653011679649353, -32682974], [0, 0, 0, 1]],
+                "opacity": 0.25
+              },
+              {
+                "name": "Blockface Image",
+                "source": "precomputed://https://zam10143.zam.kfa-juelich.de/chumni/nifti/cb905d54437734b39807e252ef8aa68bc6ac889047fbebbafd885490/BI",
+                "shader": "void main(){ float x = toNormalized(getDataValue()); if (x < 0.1) { emitTransparent(); } else { emitRGB(vec3(0.8 * x, x * 1., 0.8 * x )); } }",
+                "transform": [[0.7400000095367432, 0, 0, 11020745], [0, 0.2653011679649353, -0.6908077001571655, 2533286.5], [0, 0.6908077001571655, 0.2653011679649353, -32682974], [0, 0, 0, 1]],
+                "opacity": 1.0
+              },
+              {
+                "name": "PLI Transmittance",
+                "source": "precomputed://https://zam10143.zam.kfa-juelich.de/chumni/nifti/cb905d54437734b39807e252ef8aa68bc6ac889047fbebbafd885490/BI-TIM",
+                "shader": "void main(){ float x = toNormalized(getDataValue()); if (x > 0.9) { emitTransparent(); } else { emitRGB(vec3(x * 1., x * 0.8, x * 0.8 )); } }",
+                "transform": [[0.7400000095367432, 0, 0, 11020745], [0, 0.2653011679649353, -0.6908077001571655, 2533286.5], [0, 0.6908077001571655, 0.2653011679649353, -32682974], [0, 0, 0, 1]],
+                "opacity": 1.0
+              },
+              {
+                "name": "T2w MRI",
+                "source": "precomputed://https://zam10143.zam.kfa-juelich.de/chumni/nifti/cb905d54437734b39807e252ef8aa68bc6ac889047fbebbafd885490/BI-MRI",
+                "shader": "void main(){ float x = toNormalized(getDataValue()); if (x < 0.1) { emitTransparent(); } else { emitRGB(vec3(0.8 * x, 0.8 * x, x * 1. )); } }",
+                "transform": [[0.7400000095367432, 0, 0, 11020745], [0, 0.2653011679649353, -0.6908077001571655, 2533286.5], [0, 0.6908077001571655, 0.2653011679649353, -32682974], [0, 0, 0, 1]],
+                "opacity": 1.0
+              },
+              {
+                "name": "MRI Labels",
+                "source": "precomputed://https://zam10143.zam.kfa-juelich.de/chumni/nifti/cb905d54437734b39807e252ef8aa68bc6ac889047fbebbafd885490/BI-MRS",
+                "transform": [[0.7400000095367432, 0, 0, 11020745], [0, 0.2653011679649353, -0.6908077001571655, 2533286.5], [0, 0.6908077001571655, 0.2653011679649353, -32682974], [0, 0, 0, 1]],
+                "opacity": 1.0
+              }
+            ]
+          }
+        },
+        "referenceSpaces": [
+          {
+            "name": "Big Brain (Histology)",
+            "fullId": "minds/core/referencespace/v1.0.0/a1655b99-82f1-420f-a3c2-fe80fd4c8588"
+          }
+        ]
+      }
+    ]
+  ],
+  [
     "19d1f3bd-8825-4baf-863f-97393d03ef28",
     [
       {
