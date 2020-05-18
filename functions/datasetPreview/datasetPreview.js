@@ -39,14 +39,33 @@ exports.handler = (ev, ctx, cb) => {
   const re0 = /datasetPreview\/(.+)/.exec(path)
   if (!re0) {
     return cb(null, {
-      status: 401
+      statusCode: 401
     })
   }
   const fullReq = re0[1]
+
+  const queryingData = /^data\/([a-zA-Z0-9/_]\.jpg)$/.exec(fullReq)
+  if (queryingData) {
+    const dataPath = queryingData[1]
+    fs.readFile(`./data/${dataPath}`, 'base64', (err, data) => {
+      if (err) {
+        return cb(err)
+      }
+      cb(null, {
+        statusCode: 200,
+        body: data,
+        headers: {
+          'Content-type': 'image/jpg'
+        },
+        isBase64Encoded: true
+      })
+    })
+  }
+
   const re1 = /^([0-9a-f-]+)(\/.+)?$/.exec(fullReq)
   if (!re1) {
     return cb(null, {
-      status: 401
+      statusCode: 401
     })
   }
   const datasetId = re1[1]
@@ -78,7 +97,7 @@ exports.handler = (ev, ctx, cb) => {
   
     const foundFile = files.find(({ filename:fname }) => fname === decodedFilename)
     if (!foundFile) {
-      return cb(null, { status: 404 })
+      return cb(null, { statusCode: 404 })
     }
     // filename provided, return specified file
     return cb(null, {
