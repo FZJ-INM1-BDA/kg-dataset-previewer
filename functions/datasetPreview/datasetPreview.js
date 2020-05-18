@@ -44,7 +44,7 @@ exports.handler = (ev, ctx, cb) => {
   }
   const fullReq = re0[1]
 
-  const queryingData = /^data\/([a-zA-Z0-9/_]\.jpg)$/.exec(fullReq)
+  const queryingData = /^data\/([a-zA-Z0-9/_]+\.jpg)$/.exec(fullReq)
   if (queryingData) {
     const dataPath = queryingData[1]
     fs.readFile(`./data/${dataPath}`, 'base64', (err, data) => {
