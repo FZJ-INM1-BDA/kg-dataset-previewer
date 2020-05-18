@@ -68,7 +68,8 @@ exports.handler = (ev, ctx, cb) => {
         status: 200,
         body: JSON.stringify(files),
         headers: {
-          'Content-type': 'application/json'
+          'Content-type': 'application/json',
+          ...corsHeader
         }
       })
     }
@@ -84,7 +85,8 @@ exports.handler = (ev, ctx, cb) => {
       status: 200,
       body: JSON.stringify(foundFile),
       headers: {
-        'Content-type': 'application/json'
+        'Content-type': 'application/json',
+        ...corsHeader
       }
     })
   })
