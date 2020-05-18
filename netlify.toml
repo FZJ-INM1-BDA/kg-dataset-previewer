@@ -1,8 +1,3 @@
 [build]
   command="cp -R deploy/data functions/datasetPreview/data"
   functions="functions"
-
-[[headers]]
-  for="/*"
-    [headers.values]
-    Access-Control-Allow-Origin="*"

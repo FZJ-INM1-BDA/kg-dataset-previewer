@@ -1,5 +1,11 @@
 const fs = require('fs')
 
+const corsHeader = {
+  'Access-Control-Allow-Origin': '*',
+  // 'Access-Control-Allow-Headers': 'Content-Type',
+  'Access-Control-Allow-Methods': 'GET'
+}
+
 exports.handler = (ev, ctx, cb) => {
   const {
     path,
@@ -9,6 +15,13 @@ exports.handler = (ev, ctx, cb) => {
     body,
     isBase64Encoded,
   } = ev
+
+  if (httpMethod === 'OPTIONS') {
+    return cb(null, {
+      status: 200,
+      headers: corsHeader
+    })
+  }
 
   // looks like one does not need filter by fn
   //
