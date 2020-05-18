@@ -37,7 +37,7 @@ exports.handler = (ev, ctx, cb) => {
     })
   }
   const datasetId = re1[1]
-  const filename = decodeURIComponent(re1[2].slice(1))
+  const filename = re1[2]
 
   fs.readFile('./data/shapedPreviewData.json', 'utf-8', (err, data) => {
     if (err) throw err
@@ -59,8 +59,10 @@ exports.handler = (ev, ctx, cb) => {
         }
       })
     }
+
+    const decodedFilename = decodeURIComponent(filename.slice(1))
   
-    const foundFile = files.find(({ filename:fname }) => fname === filename)
+    const foundFile = files.find(({ filename:fname }) => fname === decodedFilename)
     if (!foundFile) {
       return cb(null, { status: 404 })
     }
