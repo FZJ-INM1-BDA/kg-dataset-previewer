@@ -11,49 +11,49 @@
             "volumes": [
               {
                 "name": "PLI Fiber Orientation Red Channel",
-                "source": "precomputed://https://zam10143.zam.kfa-juelich.de/chumni/nifti/5c38faad1b0deab8d1674248b0107cd3637faa46a88e7a039c511163/BI-FOM-HSV_R",
+                "source": "precomputed://https://zam10143.zam.kfa-juelich.de/chumni/nifti/a7e42ff021af3d71605d1f0c07ec31e7937e325876277925fd14b02f/BI-FOM-HSV_R",
                 "shader": "void main(){ float x = toNormalized(getDataValue()); if (x < 0.1) { emitTransparent(); } else { emitRGB(vec3(1.0 * x, x * 0., 0. * x )); } }",
                 "transform": [[0.7400000095367432, 0, 0, 11020745], [0, 0.2653011679649353, -0.6908077001571655, 2533286.5], [0, 0.6908077001571655, 0.2653011679649353, -32682974], [0, 0, 0, 1]],
                 "opacity": 1.0
               },
               {
                 "name": "PLI Fiber Orientation Green Channel",
-                "source": "precomputed://https://zam10143.zam.kfa-juelich.de/chumni/nifti/5c38faad1b0deab8d1674248b0107cd3637faa46a88e7a039c511163/BI-FOM-HSV_G",
+                "source": "precomputed://https://zam10143.zam.kfa-juelich.de/chumni/nifti/a7e42ff021af3d71605d1f0c07ec31e7937e325876277925fd14b02f/BI-FOM-HSV_G",
                 "shader": "void main(){ float x = toNormalized(getDataValue()); if (x < 0.1) { emitTransparent(); } else { emitRGB(vec3(0. * x, x * 1., 0. * x )); } }",
                 "transform": [[0.7400000095367432, 0, 0, 11020745], [0, 0.2653011679649353, -0.6908077001571655, 2533286.5], [0, 0.6908077001571655, 0.2653011679649353, -32682974], [0, 0, 0, 1]],
                 "opacity": 0.5
               },
               {
                 "name": "PLI Fiber Orientation Blue Channel",
-                "source": "precomputed://https://zam10143.zam.kfa-juelich.de/chumni/nifti/5c38faad1b0deab8d1674248b0107cd3637faa46a88e7a039c511163/BI-FOM-HSV_B",
+                "source": "precomputed://https://zam10143.zam.kfa-juelich.de/chumni/nifti/a7e42ff021af3d71605d1f0c07ec31e7937e325876277925fd14b02f/BI-FOM-HSV_B",
                 "shader": "void main(){ float x = toNormalized(getDataValue()); if (x < 0.1) { emitTransparent(); } else { emitRGB(vec3(0. * x, x * 0., 1.0 * x )); } }",
                 "transform": [[0.7400000095367432, 0, 0, 11020745], [0, 0.2653011679649353, -0.6908077001571655, 2533286.5], [0, 0.6908077001571655, 0.2653011679649353, -32682974], [0, 0, 0, 1]],
                 "opacity": 0.25
               },
               {
                 "name": "Blockface Image",
-                "source": "precomputed://https://zam10143.zam.kfa-juelich.de/chumni/nifti/5c38faad1b0deab8d1674248b0107cd3637faa46a88e7a039c511163/BI",
+                "source": "precomputed://https://zam10143.zam.kfa-juelich.de/chumni/nifti/a7e42ff021af3d71605d1f0c07ec31e7937e325876277925fd14b02f/BI",
                 "shader": "void main(){ float x = toNormalized(getDataValue()); if (x < 0.1) { emitTransparent(); } else { emitRGB(vec3(0.8 * x, x * 1., 0.8 * x )); } }",
                 "transform": [[0.7400000095367432, 0, 0, 11020745], [0, 0.2653011679649353, -0.6908077001571655, 2533286.5], [0, 0.6908077001571655, 0.2653011679649353, -32682974], [0, 0, 0, 1]],
                 "opacity": 1.0
               },
               {
                 "name": "PLI Transmittance",
-                "source": "precomputed://https://zam10143.zam.kfa-juelich.de/chumni/nifti/5c38faad1b0deab8d1674248b0107cd3637faa46a88e7a039c511163/BI-TIM",
+                "source": "precomputed://https://zam10143.zam.kfa-juelich.de/chumni/nifti/a7e42ff021af3d71605d1f0c07ec31e7937e325876277925fd14b02f/BI-TIM",
                 "shader": "void main(){ float x = toNormalized(getDataValue()); if (x > 0.9) { emitTransparent(); } else { emitRGB(vec3(x * 1., x * 0.8, x * 0.8 )); } }",
                 "transform": [[0.7400000095367432, 0, 0, 11020745], [0, 0.2653011679649353, -0.6908077001571655, 2533286.5], [0, 0.6908077001571655, 0.2653011679649353, -32682974], [0, 0, 0, 1]],
                 "opacity": 1.0
               },
               {
                 "name": "T2w MRI",
-                "source": "precomputed://https://zam10143.zam.kfa-juelich.de/chumni/nifti/5c38faad1b0deab8d1674248b0107cd3637faa46a88e7a039c511163/BI-MRI",
+                "source": "precomputed://https://zam10143.zam.kfa-juelich.de/chumni/nifti/a7e42ff021af3d71605d1f0c07ec31e7937e325876277925fd14b02f/BI-MRI",
                 "shader": "void main(){ float x = toNormalized(getDataValue()); if (x < 0.1) { emitTransparent(); } else { emitRGB(vec3(0.8 * x, 0.8 * x, x * 1. )); } }",
                 "transform": [[0.7400000095367432, 0, 0, 11020745], [0, 0.2653011679649353, -0.6908077001571655, 2533286.5], [0, 0.6908077001571655, 0.2653011679649353, -32682974], [0, 0, 0, 1]],
                 "opacity": 1.0
               },
               {
                 "name": "MRI Labels",
-                "source": "precomputed://https://zam10143.zam.kfa-juelich.de/chumni/nifti/5c38faad1b0deab8d1674248b0107cd3637faa46a88e7a039c511163/BI-MRS",
+                "source": "precomputed://https://zam10143.zam.kfa-juelich.de/chumni/nifti/a7e42ff021af3d71605d1f0c07ec31e7937e325876277925fd14b02f/BI-MRS",
                 "transform": [[0.7400000095367432, 0, 0, 11020745], [0, 0.2653011679649353, -0.6908077001571655, 2533286.5], [0, 0.6908077001571655, 0.2653011679649353, -32682974], [0, 0, 0, 1]],
                 "opacity": 1.0
               }
