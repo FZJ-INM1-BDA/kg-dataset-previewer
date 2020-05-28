@@ -55,6 +55,9 @@ export class KgDatasetPreviewer {
     const imgTag = this.el.querySelector('img')
     if (imgTag) return imgTag.getAttribute('src')
 
+    const dataImgTag = this.el.querySelector('[data-img-src]')
+    if (dataImgTag) return dataImgTag.getAttribute('data-img-src')
+
     const chartEl = this.el.querySelector('kg-dataset-previewer-chart')
     if (chartEl) return await chartEl['getHrefUrl']()
 
