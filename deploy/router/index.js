@@ -1,39 +1,26 @@
 const express = require('express')
-const fs = require('fs')
 const path = require('path')
-const pathToPreviewData = path.resolve(__dirname, '../data/shapedPreviewData.json')
 const { getFilterPreviewFn } = require('./util')
-
-let list = []
-fs.readFile(pathToPreviewData, 'utf-8', (err, data) => {
-  if (err) throw err
-  const arr = JSON.parse(data)
-  for (const [key, val] of arr){
-    datasetMap.set(key, val)
-  }
-  list = Array.from(datasetMap.keys())
-})
-
-const datasetMap = new Map()
+const { DS_PRV_KEY, DS_SINGLE_PRV_KEY } = require('../constants')
+const { getPreviewsHandler } = require('./getPreviews')
+const { transformPreviews } = require('./transformPreviews')
+const { getSinglePreview } = require('./getSinglePreview')
 
 const router = express.Router()
-
-const getFiles = ({ datasetId }) => datasetMap.get(datasetId)
 
 router.use('/data/receptor', express.static(
   path.join(__dirname, '../data/receptor')
 ))
 
-router.get('/:datasetId/:qFilename', (req, res) => {
-  const { datasetId, qFilename } = req.params
-  const files = getFiles({ datasetId })
-  if (!files) return res.status(404).end()
-  const file = files.find(({ filename }) => filename === qFilename)
-  if (file) return res.status(200).json(file)
-  return res.status(404).end()
+router.use('/getImagePipe', require('./getImagePipe'))
+
+router.get('/:datasetId/:filename', getPreviewsHandler, transformPreviews, getSinglePreview, (req, res) => {
+  const singlePrev = res.locals[DS_SINGLE_PRV_KEY]
+  if (!singlePrev) res.status(404).end()
+  else res.status(200).json(singlePrev)
 })
 
-router.get('/:datasetId', (req, res) => {
+router.get('/:datasetId', getPreviewsHandler, transformPreviews, (req, res) => {
   const { filterBy } = req.query
 
   let parsedFilterBy
@@ -43,12 +30,10 @@ router.get('/:datasetId', (req, res) => {
     return res.status(400).send(`filterBy needs to be URL encoded array of strings`)
   }
 
-  const { datasetId } = req.params
-  const r = getFiles({ datasetId })
+  const r = res.locals[DS_PRV_KEY]
   if (!r) return res.status(404).end()
 
   if (!filterBy) return res.status(200).json(r)
-  
   res.status(200).json(
     r.filter(getFilterPreviewFn(parsedFilterBy))
   )

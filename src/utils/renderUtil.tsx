@@ -30,6 +30,7 @@ export function getRenderFunction({ itemClass, darkmode = false }: {itemClass?: 
       case MIME_TYPE.NIFTI: {
         return <span class={itemClass}>nifti can be visited at: {url}</span>
       }
+      case MIME_TYPE.PNG: 
       case MIME_TYPE.JPEG: {
         return <div class={(itemClass || '') + ' img-container-cls'} style={{background: `url('${url}') center center / contain no-repeat`}} data-img-src={url}></div>
       }

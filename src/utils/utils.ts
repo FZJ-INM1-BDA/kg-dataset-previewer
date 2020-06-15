@@ -11,6 +11,7 @@ export function getKgInfo({ kgId, backendUrl, searchParam = new URLSearchParams(
 export const MIME_TYPE = {
   NIFTI: 'application/nifti',
   JPEG: 'image/jpeg',
+  PNG: 'image/png',
   JSON: 'application/json',
   HIBOP: 'application/hibop'
 }
