@@ -33,9 +33,6 @@ const mathjaxInitPr = require('mathjax').init({
 const router = express.Router()
 
 const { createGzip } = zlib
-const gzip = createGzip()
-
-const toPngPipe = sharp().png()
 
 const getStoreKey = ({ datasetId, filename }) => `[${APP_NAME}] [imagePipe] ${datasetId}:${filename}`
 
@@ -64,6 +61,9 @@ router.get('/',
   getSinglePreview,
   getImageFromCache,
   async (req, res) => {
+
+    const gzip = createGzip()
+    
     const { datasetId, filename } = req.params
     const { type } = req.query
     const singlePrv = res.locals[DS_SINGLE_PRV_KEY]
@@ -92,7 +92,7 @@ router.get('/',
       res.setHeader('Content-Type', 'image/png')
       res.setHeader('Content-Encoding', 'gzip')
       got.stream(_url)
-        .pipe(toPngPipe)
+        .pipe(sharp().png())
         .pipe(gzip)
         .pipe(passThrough)
         .pipe(res)
@@ -147,7 +147,7 @@ router.get('/',
         .flatten({
           background: { r: 255, g: 255, b: 255 }
         })
-        .pipe(toPngPipe)
+        .png()
         .pipe(gzip)
         .pipe(passThrough)
         .pipe(res)
@@ -201,7 +201,7 @@ router.get('/',
         .flatten({
           background: { r: 255, g: 255, b: 255 }
         })
-        .pipe(toPngPipe)
+        .png()
         .pipe(gzip)
         .pipe(passThrough)
         .pipe(res)
@@ -210,6 +210,7 @@ router.get('/',
     }
     
     passThrough.end()
+    gzip.end()
     res.status(200).send('OK')
   }
 )
