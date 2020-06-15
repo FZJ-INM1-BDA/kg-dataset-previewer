@@ -40,7 +40,7 @@ router.get('/:datasetId', getPreviewsHandler, transformPreviews, (req, res) => {
 })
 
 router.get('/', (req, res) => {
-  res.status(200).json(list)
+  res.status(200).send('OK')
 })
 
 module.exports = router
