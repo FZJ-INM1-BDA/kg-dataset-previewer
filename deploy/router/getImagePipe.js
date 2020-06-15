@@ -82,7 +82,9 @@ router.get('/',
       store.set(getStoreKey({ datasetId, filename }), totalBuffer.toString('base64'))
     })
 
-    if (type === 'tiff') {
+    const { mimetype } = singlePrv
+
+    if (mimetype.includes('image/tiff') || mimetype.includes('image/tif')) {
       const { url } = singlePrv
       let _url = url
       for (const key in contexts) {
@@ -100,8 +102,6 @@ router.get('/',
       return
     }
 
-    const { mimetype } = singlePrv
-    
     if (mimetype.includes('type=fingerprint')) {
       await mathjaxInitPr
 
