@@ -97,16 +97,19 @@ router.get('/',
 
       const gotResp = await got(_url, { responseType: 'buffer' })
 
+      console.log(`tiff fetched with status ${gotResp.statusCode}`)
       if (gotResp.statusCode >= 400) {
         return res.status(statusCode).end()
       }
 
+      console.log(`tmp file`)
       tmp.file({ postfix: '.tif' }, (err, filePath, fd, cleancb) => {
         if (err) {
           console.error(`[${APP_NAME}] generating temp file error`, err)
           res.status(500).send(err)
           return
         }
+        console.log(`tmp file created, writing file`)
         fs.writeFile(filePath, gotResp.body, err => {
           if (err) {
             console.error(`[${APP_NAME}] writing to file error`, err)
