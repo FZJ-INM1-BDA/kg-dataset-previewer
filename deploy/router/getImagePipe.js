@@ -93,6 +93,7 @@ router.get('/',
         _url = _url.replace(`${key}:`, contexts[key])
       }
 
+      console.log(`fetching tiff ${_url}`)
 
       const gotResp = await got(_url, { responseType: 'buffer' })
 
