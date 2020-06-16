@@ -5,19 +5,20 @@ const convertPreview = ({ datasetId, filename }) => ({ mimetype, ...rest }) => {
   if (mimetype.includes('application/kg-dataset-preview')) {
     if (mimetype.includes('type=fingerprint')) {
       overwriteObj['mimetype'] = 'image/png'
-      overwriteObj['url'] = `getImagePipe?kgSchema=${encodeURIComponent('minds/core/dataset/v1.0.0')}&kgId=${encodeURIComponent(datasetId)}&filename=${encodeURIComponent(filename)}&type=fingerprint`
+      overwriteObj['url'] = `getImagePipe?kgSchema=${encodeURIComponent('minds/core/dataset/v1.0.0')}&kgId=${encodeURIComponent(datasetId)}&filename=${encodeURIComponent(filename)}`
     }
     if (mimetype.includes('type=profile')) {
       overwriteObj['mimetype'] = 'image/png'
-      overwriteObj['url'] = `getImagePipe?kgSchema=${encodeURIComponent('minds/core/dataset/v1.0.0')}&kgId=${encodeURIComponent(datasetId)}&filename=${encodeURIComponent(filename)}&type=profile`
+      overwriteObj['url'] = `getImagePipe?kgSchema=${encodeURIComponent('minds/core/dataset/v1.0.0')}&kgId=${encodeURIComponent(datasetId)}&filename=${encodeURIComponent(filename)}`
     }
   }
   if (mimetype.includes('image/tiff') || mimetype.includes('image/tif')) {
     overwriteObj['mimetype'] = 'image/png'
-    overwriteObj['url'] = `getImagePipe?kgSchema=${encodeURIComponent('minds/core/dataset/v1.0.0')}&kgId=${encodeURIComponent(datasetId)}&filename=${encodeURIComponent(filename)}&type=tiff`
+    overwriteObj['url'] = `getImagePipe?kgSchema=${encodeURIComponent('minds/core/dataset/v1.0.0')}&kgId=${encodeURIComponent(datasetId)}&filename=${encodeURIComponent(filename)}`
   }
   return {
     ...rest,
+    mimetype,
     ...overwriteObj
   }
 }

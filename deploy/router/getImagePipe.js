@@ -4,6 +4,8 @@ const got = require('got')
 const sharp = require('sharp')
 const { PassThrough } = require('stream')
 const d3 = require('d3')
+const tmp = require('tmp')
+const fs = require('fs')
 
 const { DS_SINGLE_PRV_KEY, APP_NAME } = require('../constants')
 const { getPreviewsHandler } = require('./getPreviews')
@@ -93,11 +95,42 @@ router.get('/',
 
       res.setHeader('Content-Type', 'image/png')
       res.setHeader('Content-Encoding', 'gzip')
-      got.stream(_url)
-        .pipe(sharp().png())
-        .pipe(gzip)
-        .pipe(passThrough)
-        .pipe(res)
+
+      const gotResp = await got(_url, { responseType: 'buffer' })
+
+      if (gotResp.statusCode >= 400) {
+        return res.status(statusCode).end()
+      }
+
+      tmp.file({ postfix: '.tif' }, (err, filePath, fd, cleancb) => {
+        if (err) {
+          console.error(`[${APP_NAME}] generating temp file error`, err)
+          res.status(500).send(err)
+          return
+        }
+        fs.writeFile(filePath, gotResp.body, err => {
+          if (err) {
+            console.error(`[${APP_NAME}] writing to file error`, err)
+            res.status(500).send(err)
+            return
+          }
+          sharp(filePath)
+            .png()
+            .pipe(gzip)
+            .pipe(passThrough)
+            .pipe(res)
+        })
+      })
+
+      /**
+       * stream tiff does not seem to work on OKD. save to file, then read from file instead
+       */
+
+      // got.stream(_url)
+      //   .pipe(sharp().png())
+      //   .pipe(gzip)
+      //   .pipe(passThrough)
+      //   .pipe(res)
       
       return
     }

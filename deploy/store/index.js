@@ -51,11 +51,12 @@ if (redisURL) {
   }
 
   exports.StoreType = `redis`
+  console.log(`redis`)
 
 } else {
   const LRU = require('lru-cache')
   const store = new LRU({
-    max: 128 * 1024 * 1024, // 128mb
+    max: 1024 * 1024 * 1024, // 1gb
     length: (n, key) => n.length,
     maxAge: Infinity, // never expires
   })
@@ -73,4 +74,5 @@ if (redisURL) {
   }
 
   exports.StoreType = `lru-cache`
+  console.log(`lru-cache`)
 }
