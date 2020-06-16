@@ -6,6 +6,7 @@ const { PassThrough } = require('stream')
 const d3 = require('d3')
 const tmp = require('tmp')
 const fs = require('fs')
+const { exec } = require('child_process')
 
 const { DS_SINGLE_PRV_KEY, APP_NAME } = require('../constants')
 const { getPreviewsHandler } = require('./getPreviews')
@@ -93,15 +94,6 @@ router.get('/',
         _url = _url.replace(`${key}:`, contexts[key])
       }
 
-      console.log(`fetching tiff ${_url}`)
-
-      const gotResp = await got(_url, { responseType: 'buffer' })
-
-      console.log(`tiff fetched with status ${gotResp.statusCode}`)
-      if (gotResp.statusCode >= 400) {
-        return res.status(statusCode).end()
-      }
-
       console.log(`tmp file`)
       tmp.file({ postfix: '.tif' }, (err, filePath, fd, cleancb) => {
         if (err) {
@@ -109,13 +101,15 @@ router.get('/',
           res.status(500).send(err)
           return
         }
-        console.log(`tmp file created, writing file`)
-        fs.writeFile(filePath, gotResp.body, err => {
+
+        console.log(`fetching tiff ${_url} output to ${filePath} via curl`)
+
+        exec(`curl -o ${filePath} '${_url}'`, (err, stdout, stderr) => {
           if (err) {
-            console.error(`[${APP_NAME}] writing to file error`, err)
-            res.status(500).send(err)
-            return
+            console.error(err)
+            return res.status(500).send(err)
           }
+
           console.log('sharping', _url, filePath)
           res.setHeader('Content-Type', 'image/png')
           res.setHeader('Content-Encoding', 'gzip')
