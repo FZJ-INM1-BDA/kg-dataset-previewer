@@ -93,8 +93,6 @@ router.get('/',
         _url = _url.replace(`${key}:`, contexts[key])
       }
 
-      res.setHeader('Content-Type', 'image/png')
-      res.setHeader('Content-Encoding', 'gzip')
 
       const gotResp = await got(_url, { responseType: 'buffer' })
 
@@ -114,8 +112,15 @@ router.get('/',
             res.status(500).send(err)
             return
           }
+          console.log('sharping', _url, filePath)
+          res.setHeader('Content-Type', 'image/png')
+          res.setHeader('Content-Encoding', 'gzip')
+
           sharp(filePath)
             .png()
+            .on('info', info => {
+              console.log('info log', _url, filePath, info)
+            })
             .pipe(gzip)
             .pipe(passThrough)
             .pipe(res)
