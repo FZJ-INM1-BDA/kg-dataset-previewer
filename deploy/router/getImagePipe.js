@@ -68,7 +68,6 @@ router.get('/',
     const gzip = createGzip()
     
     const { datasetId, filename } = req.params
-    const { type } = req.query
     const singlePrv = res.locals[DS_SINGLE_PRV_KEY]
     const contexts = singlePrv['@context']
 
@@ -94,7 +93,6 @@ router.get('/',
         _url = _url.replace(`${key}:`, contexts[key])
       }
 
-      console.log(`tmp file`)
       tmp.file({ postfix: '.tif' }, (err, filePath, fd, cleancb) => {
         if (err) {
           console.error(`[${APP_NAME}] generating temp file error`, err)
@@ -102,31 +100,28 @@ router.get('/',
           return
         }
 
-        console.log(`fetching tiff ${_url} output to ${filePath} via curl`)
-
         exec(`curl -o ${filePath} '${_url}'`, (err, stdout, stderr) => {
           if (err) {
             console.error(err)
             return res.status(500).send(err)
           }
 
-          console.log('sharping', _url, filePath)
           res.setHeader('Content-Type', 'image/png')
           res.setHeader('Content-Encoding', 'gzip')
 
           sharp(filePath)
             .png()
-            .on('info', info => {
-              console.log('info log', _url, filePath, info)
-            })
             .pipe(gzip)
             .pipe(passThrough)
             .pipe(res)
+            .on('finish', () => {
+              fs.unlink(filePath)
+            })
         })
       })
 
       /**
-       * stream tiff does not seem to work on OKD. save to file, then read from file instead
+       * got fetching tiff does not seem to work on OKD. save to file with curl, then read from file instead
        */
 
       // got.stream(_url)
