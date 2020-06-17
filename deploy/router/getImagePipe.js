@@ -115,7 +115,7 @@ router.get('/',
             .pipe(passThrough)
             .pipe(res)
             .on('finish', () => {
-              fs.unlink(filePath)
+              fs.unlink(filePath, () => cleancb())
             })
         })
       })
