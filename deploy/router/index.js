@@ -12,12 +12,24 @@ router.use('/data/receptor', express.static(
   path.join(__dirname, '../data/receptor')
 ))
 
-router.use('/getImagePipe', require('./getImagePipe'))
+
+const getCacheCtrl = ({ minute=1, hour=0, day=0 } = {}) => (_req, res, next) => {
+  const timeInS = day * 24 * 60 * 60 +
+    hour * 60 * 60 +
+    minute * 60
+  res.setHeader('Cache-Control', `max-age=${timeInS}`)
+  next()
+}
+
+const oneMinCache = getCacheCtrl()
+
+router.use('/getImagePipe', oneMinCache, require('./getImagePipe'))
 
 router.get('/:datasetId/:filename',
   getPreviewsHandler,
   transformPreviews,
   getSinglePreview,
+  oneMinCache,
   (req, res) => {
     const singlePrev = res.locals[DS_SINGLE_PRV_KEY]
     if (!singlePrev) res.status(404).end()
@@ -28,6 +40,7 @@ router.get('/:datasetId/:filename',
 router.get('/:datasetId',
   getPreviewsHandler,
   transformPreviews,
+  oneMinCache,
   (req, res) => {
     const { filterBy } = req.query
 
@@ -51,5 +64,7 @@ router.get('/:datasetId',
 router.get('/', (req, res) => {
   res.status(200).send('OK')
 })
+
+router.delete('/', require('./clearCache'))
 
 module.exports = router
