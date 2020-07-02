@@ -1,3 +1,5 @@
+require('dotenv').config()
+
 const router = require('./router')
 const PORT = process.env.PORT || 1234
 
