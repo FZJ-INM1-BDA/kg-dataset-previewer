@@ -24,6 +24,23 @@ const userPass = `${REDIS_USERNAME || ''}${( REDIS_PASSWORD && (':' + REDIS_PASS
 
 const redisURL = redisAddr && `${redisProto}://${userPass}${redisAddr}:${redisPort}`
 
+const crypto = require('crypto')
+
+let authKey
+
+const getAuthKey = () => {
+  crypto.randomBytes(128, (err, buf) => {
+    if (err) {
+      console.error(`generating random bytes error`, err)
+      return
+    }
+    authKey = buf.toString('base64')
+    console.log(`clear store key: ${authKey}`)
+  })
+}
+
+getAuthKey()
+
 const ensureString = val => {
   if (typeof val !== 'string') throw new Error(`both key and val must be string`)
 }
@@ -34,28 +51,40 @@ if (redisURL) {
   const client = redis.createClient({
     url: redisURL
   })
-
+  
   const asyncGet = promisify(client.get).bind(client)
   const asyncSet = promisify(client.set).bind(client)
+  const asyncDel = promisify(client.del).bind(client)
+
+  const keys = []
 
   exports.store = {
     set: async (key, val) => {
       ensureString(key)
       ensureString(val)
       asyncSet(key, val)
+      keys.push(key)
     },
     get: async (key) => {
       ensureString(key)
       return asyncGet(key)
+    },
+    clear: async auth => {
+      if (auth !== authKey) {
+        getAuthKey()
+        throw new Error(`unauthorized`)
+      }
+      await asyncDel(keys.splice(0))
     }
   }
 
   exports.StoreType = `redis`
+  console.log(`redis`)
 
 } else {
   const LRU = require('lru-cache')
   const store = new LRU({
-    max: 128 * 1024 * 1024, // 128mb
+    max: 1024 * 1024 * 1024, // 1gb
     length: (n, key) => n.length,
     maxAge: Infinity, // never expires
   })
@@ -69,8 +98,16 @@ if (redisURL) {
     get: async (key) => {
       ensureString(key)
       return store.get(key)
+    },
+    clear: async auth => {
+      if (auth !== authKey) {
+        getAuthKey()
+        throw new Error(`unauthorized`)
+      }
+      store.reset()
     }
   }
 
   exports.StoreType = `lru-cache`
+  console.log(`lru-cache`)
 }

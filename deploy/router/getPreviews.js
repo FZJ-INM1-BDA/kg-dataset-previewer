@@ -24,8 +24,11 @@ const getDatasetFilePreviews = id => new Promise(async (rs, rj) => {
   }
   fs.readFile(path.resolve(MOUNTED_DATA_PREVIEW_DRIVE, id), 'utf-8', (err, data) => {
     if (err) {
-      console.warn(`[${APP_NAME}] getPreviewsHandler.js #getDatasetFilePreviews`, err)
-      return rj(err)
+      /**
+       * if file does not exist, resolve empty array
+       */
+      if (err.code === 'ENOENT') return rs([])
+      else return rj(err)
     }
 
     const parsedData = JSON.parse(data)
