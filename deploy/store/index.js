@@ -41,6 +41,8 @@ const getAuthKey = () => {
 
 getAuthKey()
 
+const keyPrefix = process.env.KEY_PREFIX || '[kg-dataset-preview v0.0.1]'
+
 const ensureString = val => {
   if (typeof val !== 'string') throw new Error(`both key and val must be string`)
 }
@@ -59,13 +61,15 @@ if (redisURL) {
   const keys = []
 
   exports.store = {
-    set: async (key, val) => {
+    set: async (_key, val) => {
+      const key = `${keyPrefix}${_key}`
       ensureString(key)
       ensureString(val)
       asyncSet(key, val)
       keys.push(key)
     },
-    get: async (key) => {
+    get: async (_key) => {
+      const key = `${keyPrefix}${_key}`
       ensureString(key)
       return asyncGet(key)
     },
@@ -80,6 +84,10 @@ if (redisURL) {
 
   exports.StoreType = `redis`
   console.log(`redis`)
+
+  process.on('exit', () => {
+    asyncDel(keys.splice(0))
+  })
 
 } else {
   const LRU = require('lru-cache')
