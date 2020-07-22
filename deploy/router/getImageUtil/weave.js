@@ -266,7 +266,7 @@
         .data( receptors.map(PolarSvg.GenerateLabel) )
         .enter()
           .append('g')
-            .attr('transform', (_receptor, index, array) => `rotate(-${ 360 / array.length * index + 90})`)
+            .attr('transform', (_receptor, index, array) => `rotate(${ 360 / array.length * index - 90})`)
       
       radialGuideLines
         .append('line')
@@ -289,12 +289,12 @@
             })
             .attr(`transform`, (svg, index, array) => {
               const { width, height } = svg
-              const rot = 360 / array.length * index + 90
+              const rot = 360 / array.length * index - 90
               const flip = rot > 90 && rot < 270
               const w = Number(width.replace('ex', '')) * fudgeFactor
               const h = Number(height.replace('ex', '')) * fudgeFactor / 2
               const translateTxt = flip ? `translate(-${w}, -${h})` : `translate(0, -${h})`
-              return `rotate(${1 * rot}) ${translateTxt}`
+              return `rotate(${-1 * rot}) ${translateTxt}`
             })
             .html(({label}) => label)
 
