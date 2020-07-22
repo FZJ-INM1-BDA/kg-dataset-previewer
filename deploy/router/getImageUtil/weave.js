@@ -160,7 +160,7 @@
           ...rest,
           density: {
             ...density,
-            mean: Number(density.sd),
+            mean: Number(density.mean),
             sd: Number(density.sd)
           }
         }
