@@ -12,17 +12,17 @@ if (!MOUNTED_DATA_PREVIEW_DRIVE) throw new Error(`MOUNTED_DATA_PREVIEW_DRIVE env
  * let store deal with cache invalidation
  * getDatasetFilePreviews will always return a cached version, if exists
  */
-const getDatasetFilePreviews = id => new Promise(async (rs, rj) => {
+const getDatasetFilePreviews = ({ datasetId: id, datasetSchema }) => new Promise(async (rs, rj) => {
 
-  const getStoreId = _id => `[${APP_NAME}] [ds-prv] ${_id}`
-  const _id = getStoreId(id)
+  const getStoreId = (_schema, _id) => `[${APP_NAME}] [ds-prv] ${_schema} ${_id}`
+  const _id = getStoreId(datasetSchema, id)
 
   const cachedData = await store.get(_id)
   if (cachedData) {
     const parsedData = JSON.parse(cachedData)
     return rs(parsedData)
   }
-  fs.readFile(path.resolve(MOUNTED_DATA_PREVIEW_DRIVE, id), 'utf-8', (err, data) => {
+  fs.readFile(path.join(MOUNTED_DATA_PREVIEW_DRIVE, datasetSchema.replace(/\//g, '_') , id), 'utf-8', (err, data) => {
     if (err) {
       /**
        * if file does not exist, resolve empty array
@@ -38,11 +38,11 @@ const getDatasetFilePreviews = id => new Promise(async (rs, rj) => {
 })
 
 const getPreviewsHandler = async (req, res, next) => {
-  const { datasetId } = req.params
+  const { datasetId, datasetSchema } = req.params
   if (!datasetId) return next(`datasetId must be defined! But instead got: ${datasetId}`)
 
   try {
-    const arr = await getDatasetFilePreviews(datasetId)
+    const arr = await getDatasetFilePreviews({ datasetId, datasetSchema })
     res.locals[DS_PRV_KEY] = arr
     next()
   } catch (err) {

@@ -25,7 +25,7 @@ const oneMinCache = getCacheCtrl()
 
 router.use('/getImagePipe', oneMinCache, require('./getImagePipe'))
 
-router.get('/:datasetId/:filename',
+router.get('/:datasetSchema/:datasetId/:filename',
   getPreviewsHandler,
   transformPreviews,
   getSinglePreview,
@@ -37,7 +37,7 @@ router.get('/:datasetId/:filename',
   }
 )
 
-router.get('/:datasetId',
+router.get('/:datasetSchema/:datasetId',
   getPreviewsHandler,
   transformPreviews,
   oneMinCache,

@@ -94,9 +94,9 @@ export class KgDatasetPreviewer {
       this.loadingFlag = true
 
       const searchParam = this.getSearchParam()
-      
       getKgInfo({
         kgId: this.kgId,
+        kgSchema: this.kgSchema,
         backendUrl: this.backendUrl,
         ...(
           searchParam ? { searchParam } : {}

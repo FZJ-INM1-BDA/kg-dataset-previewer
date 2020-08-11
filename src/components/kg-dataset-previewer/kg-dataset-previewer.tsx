@@ -91,7 +91,7 @@ export class KgDatasetPreviewer {
     }
 
     this.loadingFlag = true
-    const fetchingMoreInfoUrl = `${this.backendUrl}/${encodeURIComponent(this.kgId)}/${encodeURIComponent(this.filename)}`
+    const fetchingMoreInfoUrl = `${this.backendUrl}/${encodeURIComponent(this.kgSchema)}/${encodeURIComponent(this.kgId)}/${encodeURIComponent(this.filename)}`
     fetch(fetchingMoreInfoUrl)
       .then(res => {
         const { status, statusText } = res
