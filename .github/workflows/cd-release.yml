@@ -9,14 +9,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - run: |
-      PACKAGEJSON_VER=v$(cat package.json | jq -r '.version')
-      echo PACKAGEJSON_VER $PACKAGEJSON_VER
-      echo GITHUB_REF $GITHUB_REF
-      if [ "$GITHUB_REF" = "$PACKAGEJSON_VER" ]; then
-        exit 0
-      else
-        exit 1
-      fi
+        PACKAGEJSON_VER=v$(cat package.json | jq -r '.version')
+        echo PACKAGEJSON_VER $PACKAGEJSON_VER
+        echo GITHUB_REF $GITHUB_REF
+        if [ "$GITHUB_REF" = "$PACKAGEJSON_VER" ]; then
+          exit 0
+        else
+          exit 1
+        fi
       
   create-release:
     runs-on: ubuntu-latest
