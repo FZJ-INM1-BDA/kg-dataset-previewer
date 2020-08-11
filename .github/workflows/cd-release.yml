@@ -8,6 +8,9 @@ jobs:
   check-version:
     runs-on: ubuntu-latest
     steps:
+
+    - name: Checkout
+      uses: actions/checkout@v1
     - run: |
         PACKAGEJSON_VER=v$(cat package.json | jq -r '.version')
         echo PACKAGEJSON_VER $PACKAGEJSON_VER
