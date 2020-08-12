@@ -1,4 +1,5 @@
 const { DS_PRV_KEY, APP_NAME } = require('../constants')
+const { HOSTNAME = '' } = process.env
 
 const convertPreview = ({ datasetId, filename }) => ({ mimetype, ...rest }) => {
   const overwriteObj = {}
@@ -18,8 +19,7 @@ const convertPreview = ({ datasetId, filename }) => ({ mimetype, ...rest }) => {
       } else {
         overwriteObj['mimetype'] = 'application/octet-stream'
       }
-      const { url } = rest
-      overwriteObj['url'] = `proxy?kgSchema=${encodeURIComponent(url)}`
+      overwriteObj['url'] = `${HOSTNAME}proxy?kgSchema=${encodeURIComponent('minds/core/dataset/v1.0.0')}&kgId=${encodeURIComponent(datasetId)}&filename=${encodeURIComponent(filename)}`
     }
   } else {
     if (mimetype.includes('image/tiff') || mimetype.includes('image/tif')) {

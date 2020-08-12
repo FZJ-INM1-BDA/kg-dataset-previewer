@@ -12,7 +12,7 @@ if (!MOUNTED_DATA_PREVIEW_DRIVE) throw new Error(`MOUNTED_DATA_PREVIEW_DRIVE env
  * let store deal with cache invalidation
  * getDatasetFilePreviews will always return a cached version, if exists
  */
-const getDatasetFilePreviews = ({ datasetId: id, datasetSchema }) => new Promise(async (rs, rj) => {
+const getDatasetFilePreviews = ({ datasetId: id, datasetSchema = 'minds/core/dataset/v1.0.0' }) => new Promise(async (rs, rj) => {
 
   const getStoreId = (_schema, _id) => `[${APP_NAME}] [ds-prv] ${_schema} ${_id}`
   const _id = getStoreId(datasetSchema, id)
@@ -38,7 +38,8 @@ const getDatasetFilePreviews = ({ datasetId: id, datasetSchema }) => new Promise
 })
 
 const getPreviewsHandler = async (req, res, next) => {
-  const { datasetId, datasetSchema } = req.params
+  const datasetId = req.params['datasetId'] || res.locals['datasetId']
+  const datasetSchema = req.params['datasetSchema'] || res.locals['datasetSchema']
   if (!datasetId) return next(`datasetId must be defined! But instead got: ${datasetId}`)
 
   try {
