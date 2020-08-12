@@ -1,0 +1,53 @@
+name: Release on tag version
+
+on:
+  push:
+    tags:
+      - 'v*'
+jobs:
+  check-version:
+    runs-on: ubuntu-latest
+    steps:
+
+    - name: Checkout
+      uses: actions/checkout@v1
+    - run: |
+        PACKAGEJSON_VER=v$(cat package.json | jq -r '.version')
+        echo PACKAGEJSON_VER $PACKAGEJSON_VER
+        echo GITHUB_REF $GITHUB_REF
+        if [ "${GITHUB_REF#refs/tags/}" = "$PACKAGEJSON_VER" ]; then
+          exit 0
+        else
+          exit 1
+        fi
+      
+  create-release:
+    if: success()
+    runs-on: ubuntu-latest
+    steps:
+    - name: Create Release
+      id: create_release
+      uses: actions/create-release@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        tag_name: ${{ github.ref }}
+        release_name: Release ${{ github.ref }}
+        draft: false
+        prerelease: false
+
+  publish-npm:
+    # needs: build
+    if: success()
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 12
+          registry-url: https://registry.npmjs.org/
+      - run: npm i
+      - run: npm run build
+      - run: npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{secrets.npm_token}}

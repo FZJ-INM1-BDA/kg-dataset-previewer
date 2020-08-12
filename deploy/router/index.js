@@ -1,6 +1,8 @@
 const express = require('express')
 const path = require('path')
-const { getFilterPreviewFn } = require('./util')
+const got = require('got')
+const { pipeline } = require('stream')
+const { getFilterPreviewFn, queryToParamMiddleware } = require('./util')
 const { DS_PRV_KEY, DS_SINGLE_PRV_KEY } = require('../constants')
 const { getPreviewsHandler } = require('./getPreviews')
 const { transformPreviews } = require('./transformPreviews')
@@ -25,7 +27,26 @@ const oneMinCache = getCacheCtrl()
 
 router.use('/getImagePipe', oneMinCache, require('./getImagePipe'))
 
-router.get('/:datasetId/:filename',
+router.use('/proxy',
+  oneMinCache,
+  queryToParamMiddleware,
+  getPreviewsHandler,
+  getSinglePreview,
+  (req, res) => {
+    const singlePrv = res.locals[DS_SINGLE_PRV_KEY]
+    const { url } = singlePrv
+    res.setHeader('Content-type', 'application/octet-stream')
+    pipeline(
+      got.stream(url),
+      res,
+      err => {
+        if (err) res.status(500).end()
+      }
+    )
+  }
+)
+
+router.get('/:datasetSchema/:datasetId/:filename',
   getPreviewsHandler,
   transformPreviews,
   getSinglePreview,
@@ -37,7 +58,7 @@ router.get('/:datasetId/:filename',
   }
 )
 
-router.get('/:datasetId',
+router.get('/:datasetSchema/:datasetId',
   getPreviewsHandler,
   transformPreviews,
   oneMinCache,
