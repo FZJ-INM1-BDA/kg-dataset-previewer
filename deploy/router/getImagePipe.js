@@ -13,6 +13,7 @@ const { getPreviewsHandler } = require('./getPreviews')
 const { getSinglePreview } = require('./getSinglePreview')
 const { store } = require('../store')
 const { weave } = require('./getImageUtil/weave')
+const { queryToParamMiddleware } = require('./util')
 
 let LinearSvg, PolarSvg, parseFingerprint, parseReceptorMetadata, parseReceptorProfile
 const mathjaxInitPr = require('mathjax').init({
@@ -54,12 +55,7 @@ const getImageFromCache = async (req, res, next) => {
 }
 
 router.get('/',
-  (req, res, next) => {
-    const { kgSchema, kgId, filename } = req.query
-    req.params['datasetId'] = kgId
-    req.params['filename'] = filename
-    next()
-  },
+  queryToParamMiddleware,
   getPreviewsHandler,
   getSinglePreview,
   getImageFromCache,
