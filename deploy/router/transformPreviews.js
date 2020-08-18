@@ -18,6 +18,7 @@ const convertPreview = ({ datasetId, filename }) => ({ mimetype, ...rest }) => {
   }
   return {
     ...rest,
+    mimetype,
     ...overwriteObj
   }
 }
