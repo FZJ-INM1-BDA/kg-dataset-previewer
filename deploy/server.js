@@ -5,7 +5,9 @@ const PORT = process.env.PORT || 1234
 
 const app = require('express')()
 
-app.use(require('cors')())
-app.use('/datasetPreview', router)
+const HOSTNAME_PATH = process.env.HOSTNAME_PATH || '/datasetPreview'
 
-app.listen(PORT, () => console.log(`app listening on port ${PORT}`))
+app.use(require('cors')())
+app.use(HOSTNAME_PATH, router)
+
+app.listen(PORT, () => console.log(`app listening on port ${PORT} for path ${HOSTNAME_PATH}`))
