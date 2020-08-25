@@ -1,7 +1,8 @@
 const { DS_PRV_KEY, APP_NAME } = require('../constants')
 
-const convertPreview = ({ datasetId, filename }) => ({ mimetype, ...rest }) => {
+const convertPreview = ({ datasetId, filename: firstFilename }) => ({ mimetype, ...rest }) => {
   const overwriteObj = {}
+  const filename = firstFilename || rest.filename
   if (mimetype.includes('application/kg-dataset-preview')) {
     if (mimetype.includes('type=fingerprint')) {
       overwriteObj['mimetype'] = 'image/png'
