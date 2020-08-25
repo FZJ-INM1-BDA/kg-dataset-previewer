@@ -4,6 +4,9 @@ const got = require('got')
 const sharp = require('sharp')
 const { PassThrough } = require('stream')
 const d3 = require('d3')
+const tmp = require('tmp')
+const fs = require('fs')
+const { exec } = require('child_process')
 
 const { DS_SINGLE_PRV_KEY, APP_NAME } = require('../constants')
 const { getPreviewsHandler } = require('./getPreviews')
@@ -89,13 +92,42 @@ router.get('/',
         _url = _url.replace(`${key}:`, contexts[key])
       }
 
-      res.setHeader('Content-Type', 'image/png')
-      res.setHeader('Content-Encoding', 'gzip')
-      got.stream(_url)
-        .pipe(toPngPipe)
-        .pipe(gzip)
-        .pipe(passThrough)
-        .pipe(res)
+      tmp.file({ postfix: '.tif' }, (err, filePath, fd, cleancb) => {
+        if (err) {
+          console.error(`[${APP_NAME}] generating temp file error`, err)
+          res.status(500).send(err)
+          return
+        }
+
+        exec(`curl -o ${filePath} '${_url}'`, (err, stdout, stderr) => {
+          if (err) {
+            console.error(err)
+            return res.status(500).send(err)
+          }
+
+          res.setHeader('Content-Type', 'image/png')
+          res.setHeader('Content-Encoding', 'gzip')
+
+          sharp(filePath)
+            .png()
+            .pipe(gzip)
+            .pipe(passThrough)
+            .pipe(res)
+            .on('finish', () => {
+              fs.unlink(filePath, () => cleancb())
+            })
+        })
+      })
+
+      /**
+       * got fetching tiff does not seem to work on OKD. save to file with curl, then read from file instead
+       */
+
+      // got.stream(_url)
+      //   .pipe(sharp().png())
+      //   .pipe(gzip)
+      //   .pipe(passThrough)
+      //   .pipe(res)
       
       return
     }

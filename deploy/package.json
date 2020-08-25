@@ -20,7 +20,8 @@
     "lru-cache": "^5.1.1",
     "mathjax": "^3.0.5",
     "redis": "^3.0.2",
-    "sharp": "^0.25.4"
+    "sharp": "^0.25.4",
+    "tmp": "^0.2.1"
   },
   "devDependencies": {
     "chai": "^4.2.0",
