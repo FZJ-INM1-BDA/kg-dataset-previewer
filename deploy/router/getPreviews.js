@@ -59,11 +59,15 @@ const getAllDsPreviews = async () => {
 
   const dirs = await asyncReaddir(MOUNTED_DATA_PREVIEW_DRIVE)
   for (const dir of dirs) {
-    const files = await asyncReaddir(path.join(MOUNTED_DATA_PREVIEW_DRIVE, dir))
-    for (const f of files) {
-      returnArr.push(
-        `${dir.replace(/_/g, '/')}/${encodeURIComponent(f)}`
-      )
+    try {
+      const files = await asyncReaddir(path.join(MOUNTED_DATA_PREVIEW_DRIVE, dir))
+      for (const f of files) {
+        returnArr.push(
+          `${dir.replace(/_/g, '/')}/${encodeURIComponent(f)}`
+        )
+      }
+    } catch (e) {
+      // ignore files in MOUNTED_DATA_PREVIEW_DRIVE that cannot be fs.readdir
     }
   }
   return returnArr
