@@ -4,7 +4,7 @@ const got = require('got')
 const { pipeline } = require('stream')
 const { getFilterPreviewFn, queryToParamMiddleware } = require('./util')
 const { DS_PRV_KEY, DS_SINGLE_PRV_KEY } = require('../constants')
-const { getPreviewsHandler } = require('./getPreviews')
+const { getPreviewsHandler, getAllDsPreviews } = require('./getPreviews')
 const { transformPreviews } = require('./transformPreviews')
 const { getSinglePreview } = require('./getSinglePreview')
 
@@ -82,9 +82,13 @@ router.get('/:datasetSchema/:datasetId',
   }
 )
 
-router.get('/', (req, res) => {
-  res.status(200).send('OK')
-})
+router.get('/',
+  oneMinCache,
+  async (_req, res) => {
+    const allPrevs = await getAllDsPreviews()
+    res.status(200).json(allPrevs)
+  }
+)
 
 router.delete('/', require('./clearCache'))
 

@@ -2,6 +2,8 @@ const fs = require('fs')
 const path = require('path')
 const { store } = require('../store')
 const { DS_PRV_KEY, APP_NAME } = require('../constants')
+const { promisify } = require('util')
+const asyncReaddir = promisify(fs.readdir)
 const {
   MOUNTED_DATA_PREVIEW_DRIVE,
 } = process.env
@@ -52,5 +54,21 @@ const getPreviewsHandler = async (req, res, next) => {
   }
 }
 
+const getAllDsPreviews = async () => {
+  const returnArr = []
+
+  const dirs = await asyncReaddir(MOUNTED_DATA_PREVIEW_DRIVE)
+  for (const dir of dirs) {
+    const files = await asyncReaddir(path.join(MOUNTED_DATA_PREVIEW_DRIVE, dir))
+    for (const f of files) {
+      returnArr.push(
+        `${dir.replace(/_/g, '/')}/${encodeURIComponent(f)}`
+      )
+    }
+  }
+  return returnArr
+}
+
+exports.getAllDsPreviews = getAllDsPreviews
 exports.getPreviewsHandler = getPreviewsHandler
 exports.getDatasetFilePreviews = getDatasetFilePreviews
