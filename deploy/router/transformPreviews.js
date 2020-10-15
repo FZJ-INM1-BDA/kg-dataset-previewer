@@ -1,7 +1,8 @@
 const { DS_PRV_KEY, APP_NAME } = require('../constants')
 const { HOSTNAME = '' } = process.env
 
-const convertPreview = ({ datasetId, filename }) => ({ mimetype, ...rest }) => {
+const convertPreview = ({ datasetId }) => ({ mimetype, ...rest }) => {
+  const { filename } = rest
   const overwriteObj = {}
   if (mimetype.includes('application/kg-dataset-preview')) {
     if (mimetype.includes('type=fingerprint')) {
@@ -35,6 +36,9 @@ const convertPreview = ({ datasetId, filename }) => ({ mimetype, ...rest }) => {
 }
 
 const transformPreviews = (req, res, next) => {
+  /**
+   * filename may be not defined!
+   */
   const { datasetId, filename } = req.params
   const arr = res.locals[DS_PRV_KEY]
   if (!arr) return next(`[${APP_NAME}] [transformPreviews.js] res.locals[DS_PRV_KEY] falsy!`)

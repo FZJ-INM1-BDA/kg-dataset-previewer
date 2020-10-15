@@ -41,8 +41,7 @@ const { createGzip } = zlib
 const getStoreKey = ({ datasetId, filename }) => `[${APP_NAME}] [imagePipe] ${datasetId}:${filename}`
 
 const getImageFromCache = async (req, res, next) => {
-  const { datasetId, filename } = req.params
-  const singlePrv = res.locals[DS_SINGLE_PRV_KEY]
+  const { datasetId, filename } = res.locals
   const result = await store.get(getStoreKey({ datasetId, filename }))
 
   if (result) {
@@ -59,12 +58,15 @@ router.get('/',
   getPreviewsHandler,
   getSinglePreview,
   getImageFromCache,
-  async (req, res) => {
+  async (req, res, next) => {
 
     const gzip = createGzip()
     
-    const { datasetId, filename } = req.params
+    const { datasetId, filename } = res.locals
     const singlePrv = res.locals[DS_SINGLE_PRV_KEY]
+    if (!singlePrv) return next({
+      message: `res.locals[DS_SINGLE_PRV_KEY] not populated`
+    })
     const contexts = singlePrv['@context']
 
     const passThrough = new PassThrough()
