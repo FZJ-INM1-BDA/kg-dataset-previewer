@@ -28,6 +28,8 @@
       flex-direction: row;
     }
   </style>
+  <script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.1.2/es5/tex-svg.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.7.0/d3.min.js"></script>
 </head>
 <body>
   <label for="darkmode-checkbox">
@@ -36,16 +38,28 @@
   
   <div class="container">
     <div class="row">
+      <kg-ds-prv-regional-feature-view
+        style="display:block;"
+        kg-ds-prv-kg-id="e715e1f7-2079-45c4-a67f-f76b102acfce"
+        kg-ds-prv-filename="hOc1_pr_examples/5-HT1A/hOc1_pr_5-HT1A.tsv">
+      </kg-ds-prv-regional-feature-view>
+      <kg-ds-prv-regional-feature-view
+        style="display:block;"
+        kg-ds-prv-kg-id="e715e1f7-2079-45c4-a67f-f76b102acfce"
+        kg-ds-prv-filename="hOc1_fp_20171202.tsv">
+      </kg-ds-prv-regional-feature-view>
+    </div>
+    <div class="row">
 
       <kg-dataset-previewer
         style="display:block; width: 500px; height: 500px;"
-        kg-ds-prv-kg-id="cb875c0d-97f4-4dbc-a9ce-472d8ba58c99"
-        kg-ds-prv-filename="α₁(NA)/profile">
+        kg-ds-prv-kg-id="e715e1f7-2079-45c4-a67f-f76b102acfce"
+        kg-ds-prv-filename="hOc1_pr_examples/5-HT1A/hOc1_pr_5-HT1A.tsv">
       </kg-dataset-previewer>
       <kg-dataset-previewer
         style="display:block; width: 500px; height: 500px;"
         kg-ds-prv-kg-id="e715e1f7-2079-45c4-a67f-f76b102acfce"
-        kg-ds-prv-filename="fingerprint">
+        kg-ds-prv-filename="hOc1_fp_20171202.tsv">
       </kg-dataset-previewer>
     </div>
 
@@ -54,7 +68,7 @@
       <kg-dataset-list
         kg-ds-prv-container-class="ul-container test-container"
         kg-ds-prv-item-class="item-class"
-        kg-ds-prv-kg-id="cb875c0d-97f4-4dbc-a9ce-472d8ba58c99">
+        kg-ds-prv-kg-id="e715e1f7-2079-45c4-a67f-f76b102acfce">
       
       </kg-dataset-list>
 
@@ -69,14 +83,14 @@
 
       <kg-dataset-previewer
         style="width: 800px; border:1px black solid;"
-        kg-ds-prv-kg-id="cb875c0d-97f4-4dbc-a9ce-472d8ba58c99"
-        kg-ds-prv-filename="5-HT₂(5-HT)/autoradiography">
+        kg-ds-prv-kg-id="e715e1f7-2079-45c4-a67f-f76b102acfce"
+        kg-ds-prv-filename="hOc1_ar_examples/M2/hOc1_ar_M2.tif">
       </kg-dataset-previewer>
 
       <kg-dataset-previewer
         style="width: 200px; height: 200px; border:1px black solid;"
-        kg-ds-prv-kg-id="cb875c0d-97f4-4dbc-a9ce-472d8ba58c99"
-        kg-ds-prv-filename="5-HT₂(5-HT)/autoradiography">
+        kg-ds-prv-kg-id="e715e1f7-2079-45c4-a67f-f76b102acfce"
+        kg-ds-prv-filename="hOc1_ar_examples/kainate/hOc1_ar_kainate.tif">
       </kg-dataset-previewer>
 
       <kg-dataset-previewer
@@ -98,6 +112,7 @@
   if (!checkbox) throw new Error(`checkbox not found`)
 
   const kgDsPrvs = document.querySelectorAll('kg-dataset-previewer')
+  const kgDsRegFeat = document.querySelectorAll('kg-ds-prv-regional-feature-view')
   const kgDsLists = document.querySelectorAll('kg-dataset-list')
 
   const container = document.getElementById('btn-container')
@@ -134,13 +149,13 @@
   document.addEventListener('change', (ev) => {
     const { checked } = checkbox
 
-    for (const prvs of kgDsPrvs){
+    for (const prvs of [...kgDsPrvs, ...kgDsRegFeat]){
       prvs.setAttribute('kg-ds-prv-darkmode', checked)
-      prvs.getDownloadPreviewHref()
+      if (prvs.getDownloadPreviewHref )prvs.getDownloadPreviewHref()
     }
 
     if (checked) {
-      document.body.style.backgroundColor = `rgb(0,0,0)`
+      document.body.style.backgroundColor = `rgb(30,30,30)`
     } else {
       document.body.style.backgroundColor = `rgb(255,255,255)`
     }

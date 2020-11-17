@@ -1,6 +1,6 @@
 {
   "name": "kg-dataset-previewer",
-  "version": "1.0.6",
+  "version": "1.1.0",
   "description": "Preview a few manually curated datasets.",
   "main": "dist/index.js",
   "module": "dist/index.mjs",
@@ -17,7 +17,7 @@
   ],
   "scripts": {
     "build": "stencil build --docs",
-    "start": "KG_DATASET_PREVIEWER_BACKEND_URL=http://localhost:1234/datasetPreview stencil build --dev --watch --serve",
+    "start": "KG_DATASET_PREVIEWER_BACKEND_URL=http://localhost:1234/v2 stencil build --dev --watch --serve",
     "test": "stencil test --spec --e2e",
     "test.watch": "stencil test --spec --e2e --watchAll",
     "generate": "stencil generate"

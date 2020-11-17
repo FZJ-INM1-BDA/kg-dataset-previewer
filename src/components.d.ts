@@ -36,6 +36,14 @@ export namespace Components {
     'getCsvUrl': () => Promise<string>;
     'getHrefUrl': () => Promise<unknown>;
   }
+  interface KgDsPrvRegionalFeatureView {
+    'backendUrl': string;
+    'darkmode': boolean;
+    'filename': string;
+    'injectedData': any;
+    'kgId': string;
+    'kgSchema': string;
+  }
 }
 
 declare global {
@@ -58,10 +66,17 @@ declare global {
     prototype: HTMLKgDatasetPreviewerChartElement;
     new (): HTMLKgDatasetPreviewerChartElement;
   };
+
+  interface HTMLKgDsPrvRegionalFeatureViewElement extends Components.KgDsPrvRegionalFeatureView, HTMLStencilElement {}
+  var HTMLKgDsPrvRegionalFeatureViewElement: {
+    prototype: HTMLKgDsPrvRegionalFeatureViewElement;
+    new (): HTMLKgDsPrvRegionalFeatureViewElement;
+  };
   interface HTMLElementTagNameMap {
     'kg-dataset-list': HTMLKgDatasetListElement;
     'kg-dataset-previewer': HTMLKgDatasetPreviewerElement;
     'kg-dataset-previewer-chart': HTMLKgDatasetPreviewerChartElement;
+    'kg-ds-prv-regional-feature-view': HTMLKgDsPrvRegionalFeatureViewElement;
   }
 }
 
@@ -88,11 +103,21 @@ declare namespace LocalJSX {
     'dataProp'?: string;
     'onKgDsPrvUpdated'?: (event: CustomEvent<any>) => void;
   }
+  interface KgDsPrvRegionalFeatureView {
+    'backendUrl'?: string;
+    'darkmode'?: boolean;
+    'filename'?: string;
+    'injectedData'?: any;
+    'kgId'?: string;
+    'kgSchema'?: string;
+    'onKg-ds-prv-regional-feature-mouseover'?: (event: CustomEvent<any>) => void;
+  }
 
   interface IntrinsicElements {
     'kg-dataset-list': KgDatasetList;
     'kg-dataset-previewer': KgDatasetPreviewer;
     'kg-dataset-previewer-chart': KgDatasetPreviewerChart;
+    'kg-ds-prv-regional-feature-view': KgDsPrvRegionalFeatureView;
   }
 }
 
@@ -105,6 +130,7 @@ declare module "@stencil/core" {
       'kg-dataset-list': LocalJSX.KgDatasetList & JSXBase.HTMLAttributes<HTMLKgDatasetListElement>;
       'kg-dataset-previewer': LocalJSX.KgDatasetPreviewer & JSXBase.HTMLAttributes<HTMLKgDatasetPreviewerElement>;
       'kg-dataset-previewer-chart': LocalJSX.KgDatasetPreviewerChart & JSXBase.HTMLAttributes<HTMLKgDatasetPreviewerChartElement>;
+      'kg-ds-prv-regional-feature-view': LocalJSX.KgDsPrvRegionalFeatureView & JSXBase.HTMLAttributes<HTMLKgDsPrvRegionalFeatureViewElement>;
     }
   }
 }

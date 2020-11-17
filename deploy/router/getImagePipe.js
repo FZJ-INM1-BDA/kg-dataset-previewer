@@ -12,7 +12,7 @@ const { DS_SINGLE_PRV_KEY, APP_NAME } = require('../constants')
 const { getPreviewsHandler } = require('./getPreviews')
 const { getSinglePreview } = require('./getSinglePreview')
 const { store } = require('../store')
-const { weave } = require('./getImageUtil/weave')
+const { weave } = require('../../common/weave')
 const { queryToParamMiddleware } = require('./util')
 
 let LinearSvg, PolarSvg, parseFingerprint, parseReceptorMetadata, parseReceptorProfile
@@ -22,7 +22,7 @@ const mathjaxInitPr = require('mathjax').init({
   }
 })
   .then(mathjax => {
-    const w = weave(d3, mathjax)
+    const w = weave(d3, mathjax, require('jsdom').JSDOM)
     LinearSvg = w['LinearSvg']
     PolarSvg = w['PolarSvg']
     parseFingerprint = w['parseFingerprint']

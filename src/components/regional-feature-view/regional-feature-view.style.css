@@ -1,0 +1,61 @@
+svg
+{
+  color: black;
+  background-color: 'white';
+}
+
+svg .fill-path
+{
+  fill: rgba(200, 200, 200, 1.0);
+}
+
+svg .line-path
+{
+  stroke: currentColor;
+  fill: none;
+}
+
+svg .radial-guidelines
+{
+  stroke: currentColor;
+  opacity: 0.2;
+}
+
+[kg-ds-prv-darkmode] svg
+{
+  color: white;
+  background-color: 'transparent';
+}
+
+
+[kg-ds-prv-darkmode] svg .fill-path
+{
+  fill: rgba(50, 50, 50, 1.0);
+}
+
+
+[kg-ds-prv-darkmode] svg .label-container
+{
+  font-weight: 100;
+  fill: white;
+}
+
+.semi-transparent
+{
+  fill: rgba(100, 100, 100, 0.2);
+}
+
+.transparent
+{
+  fill: none;
+}
+
+.semi-opaque
+{
+  opacity: 0.3;
+}
+
+svg .all-opaque
+{
+  opacity: 1.0;
+}

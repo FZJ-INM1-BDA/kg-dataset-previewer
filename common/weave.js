@@ -2,7 +2,7 @@
 // d3v ^ 5.16.0
 
 (function(exports){
-  // let d3, mathjax
+  let d3, mathjax, JSDOM
 
   // conversion from ex to pixel
   // TODO remove fudge factor in future
@@ -68,7 +68,8 @@
     }
 
     constructor(config = {}){
-      const { width, height, margin, fontFamily } = config
+
+      const { width, height, margin, fontFamily, cssSetColor } = config
       this.width = width || 600
       this.height = height || 600
       this.margin = {
@@ -79,10 +80,11 @@
         ...margin
       }
 
+      this.cssSetColor = cssSetColor
+
       this.fontFamily = fontFamily || `Arial, Helvetica, san-serif`
 
       const w = (typeof window !== 'undefined' && window) || (() => {
-        const { JSDOM } = require('jsdom')
         return new JSDOM(``, { runScripts: 'outside-only' }).window
       })()
 
@@ -107,6 +109,7 @@
       // because element.getBoundingClientRect() method calculates the post transformed
       const labelGroup = svg.append('g')
         .attr('font-family', this.fontFamily)
+        .attr(`class`, `label-container`)
 
       if (latex && mathjax) {
 
@@ -121,7 +124,6 @@
         const latexContainer = labelGroup.append('g')
         latexContainer.node().append(labelSvg)
         const { width, height } = labelSvg.getBoundingClientRect()
-        console.log({ width, height })
 
         // transform to center the svg
         const xTranslate = left
@@ -149,6 +151,10 @@
     generateSvg(){
       throw new Error(`Needs to be overwritten by subclasses`)
     }
+
+    generateD3(){
+      throw new Error(`Needs to be overwritten by subclasses`)
+    }
   }
 
   class PolarSvg extends BaseSvg{
@@ -168,17 +174,22 @@
 
       this.diameter = Math.min(this.clientWidth, this.clientHeight)
 
-      this.meanAttrs = {
-        fill: () => `rgba(200, 200, 200, 1.0)`,
-      }
+      const {
+        
+      } = config || {}
 
-      this.sdAttrs = {
-        fill: () => `none`,
-        'stroke-width': () => '1px' ,
-        stroke: () => 'rgba(100, 100, 100, 1.0)' 
-      }
+      this.meanAttrs = this.cssSetColor
+        ? {}
+        : { fill: () => `rgba(200, 200, 200, 1.0)` }
 
-      const {  } = config || {}
+      this.sdAttrs = this.cssSetColor
+        ? {}
+        : {
+            fill: () => `none`,
+            'stroke-width': () => '1px' ,
+            stroke: () => 'rgba(100, 100, 100, 1.0)' 
+          }
+
     }
 
     setMetadata(metadata) {
@@ -186,10 +197,18 @@
     }
 
     generateSvg(){
-      const svgMain = d3.select(this.document.body)
+      const svgMain = this.generateD3(this.document.body)
+      svgMain.attr('xmlns', 'http://www.w3.org/2000/svg')
+      const svgToReturn = svgMain.node().outerHTML
+      this.document.body.removeChild(svgMain.node())
+      return svgToReturn
+    }
+
+    generateD3(hostElement){
+      if (!hostElement) throw new Error(`hostElement is undefined!`)
+      const svgMain = d3.select(hostElement)
         .append('svg')
           .attr('xmlns', 'http://www.w3.org/2000/svg')
-          .style('background-color', 'white')
           .attr('width', this.width)
           .attr('height', this.height)
       const svg = svgMain
@@ -197,20 +216,21 @@
           .attr('transform', `translate(${this.margin.left}, ${this.margin.top})`)
       
       // define linear scale
-      const linearScale = d3
+      this.linearScale = d3
         .scaleLinear()
         .range([ 0, this.diameter / 2 ])
         .domain([ 0 , d3.max(this.polarData.map(({ density }) => density.mean + density.sd)) ])
 
+
       // define mean polar
-      const meanRadial = d3.lineRadial()
+      this.meanRadial = d3.lineRadial()
         .angle((d, i) => Math.PI * 2 / (this.polarData.length) * i)
-        .radius(({ density }) => linearScale(density.mean))
+        .radius(({ density }) => this.linearScale(density.mean))
       
       // define sd polar
-      const sdRadial = d3.lineRadial()
+      this.sdRadial = d3.lineRadial()
         .angle((d, index) => Math.PI * 2 / (this.polarData.length) * index)
-        .radius(({ density }) => linearScale(density.mean + density.sd))
+        .radius(({ density }) => this.linearScale(density.mean + density.sd))
         .curve(d3.curveLinearClosed)
 
       // center of polar graph
@@ -219,8 +239,9 @@
 
       // render mean
       const mean = graphContainer.append('path')
+        .attr('class', 'fill-path')
         .data( [ this.polarData ] )
-        .attr('d', meanRadial)
+        .attr('d', this.meanRadial)
 
       for (const key in this.meanAttrs) {
         mean.attr(key, this.meanAttrs[key])
@@ -228,17 +249,18 @@
 
       // render sd
       const sd = graphContainer.append('path')
+        .attr('class', 'line-path sd-line-path')
         .data( [this.polarData] )
-        .attr('d', sdRadial)
+        .attr('d', this.sdRadial)
 
       for (const key in this.sdAttrs) {
         sd.attr(key, this.sdAttrs[key])
       }
 
       // render marking cricle
-      for (const rTick of linearScale.ticks(5).slice(1)) {
+      for (const rTick of this.linearScale.ticks(5).slice(1)) {
         graphContainer.append('circle')
-          .attr('r', linearScale(rTick))
+          .attr('r', this.linearScale(rTick))
           .attr('stroke-width', '1px')
           .attr('stroke-dasharray', '1,4')
           .attr('fill', 'none')
@@ -251,7 +273,7 @@
           .attr('dominant-baseline', 'middle')
           .style('text-anchor', 'end')
           .attr('font-size', 'smaller')
-          .attr('transform', `translate(-10, -${linearScale(rTick)})`)
+          .attr('transform', `translate(-10, -${this.linearScale(rTick)})`)
           .text(rTick)
       }
 
@@ -262,20 +284,25 @@
         return found && found.receptor || null
       })
 
-      const radialGuideLines = graphContainer.selectAll('g')
+      const radialGuideLineContainers = graphContainer.selectAll('g')
         .data( receptors.map(PolarSvg.GenerateLabel) )
         .enter()
           .append('g')
+            .attr('class', (_, idx) => `radialGuideLine radialGuideLine-${idx}`)
             .attr('transform', (_receptor, index, array) => `rotate(${ 360 / array.length * index - 90})`)
       
-      radialGuideLines
+      const radialGuideLines = radialGuideLineContainers
         .append('line')
+          .attr('class', 'radial-guidelines')
           .attr('stroke-width', '1px')
-          .attr('stroke', 'rgba(200, 200, 200, 1.0)')
           .attr('stroke-dasharray', '8,2')
           .attr('x2', this.diameter / 2)
+      
+      if (!this.cssSetColor) {
+        radialGuideLines.attr('stroke', 'rgba(200, 200, 200, 1.0)')
+      }
 
-      radialGuideLines
+      radialGuideLineContainers
         .append('g')
           .attr('transform', (svg, index, array) => {
             const { label } = svg
@@ -288,7 +315,13 @@
               return 0
             })
             .attr(`transform`, (svg, index, array) => {
-              const { width, height } = svg
+              const width = typeof svg.width === 'string' || typeof svg.width === 'number'
+                ? svg.width
+                : svg.width.value 
+
+              const height = typeof svg.height === 'string' || typeof svg.height === 'number'
+                ? svg.height
+                : svg.height.value 
               const rot = 360 / array.length * index - 90
               const flip = rot > 90 && rot < 270
               const w = Number(width.replace('ex', '')) * fudgeFactor
@@ -301,6 +334,7 @@
 
       // append legends
       const lCongainer = svg.append('g')
+        .attr('fill', 'currentColor')
         .attr('transform', `translate(0, -40)`)
 
 
@@ -312,6 +346,7 @@
       // mean legend
       const lc1 = lCongainer.append('g')
       const meanRect = lc1.append('rect')
+        .attr('class', 'fill-path')
         .attr('width', 38)
         .attr('height', 16)
 
@@ -326,10 +361,12 @@
         .text(`${meanLabel} (${unit})`)
 
 
+      // sd legend
       const lc2 = lCongainer.append('g')
         .attr('transform', `translate(0, 20)`)
 
       const sdRect = lc2.append('rect')
+        .attr('class', 'line-path sd-line-path')
         .attr('width', 38)
         .attr('height', 16)
 
@@ -343,7 +380,7 @@
         .attr('y', 10)
         .text(`${sdLabel} (${unit})`)
 
-      return svgMain.node().outerHTML
+      return svgMain
     }
   }
 
@@ -355,14 +392,12 @@
       this.xAxis = xAxis
       this.yAxis = yAxis
     }
-
-    generateSvg(){
-      const scaleX = d3.scaleLinear().range([0, this.clientWidth])
-      const scaleY = d3.scaleLinear().range([this.clientHeight, 0])
-      const svgMain = d3.select(this.document.body)
+    generateD3(hostElement){
+      if (!hostElement) throw new Error(`hostElement is undefined!`)
+      this.scaleX = d3.scaleLinear().range([0, this.clientWidth])
+      this.scaleY = d3.scaleLinear().range([this.clientHeight, 0])
+      const svgMain = d3.select(hostElement)
         .append('svg')
-          .attr('xmlns', 'http://www.w3.org/2000/svg')
-          .style('background-color', 'white')
           .attr('width', this.width)
           .attr('height', this.height)
       const svg = svgMain
@@ -373,36 +408,47 @@
         d3.extent(this.linearData)
       )
 
-      scaleX.domain( [0 , extents[0][1] + 5] )
-      scaleY.domain([ 0, d3.max( this.linearData.map(v => v[1]) ) ])
+      this.scaleX.domain( [0 , extents[0][1] + 5] )
+      this.scaleY.domain([ 0, d3.max( this.linearData.map(v => v[1]) ) ])
 
       const area = d3.area()
-        .x(d => scaleX(d[0]))
+        .x(d => this.scaleX(d[0]))
         .y0(this.clientHeight)
-        .y1(d => scaleY(d[1]))
+        .y1(d => this.scaleY(d[1]))
 
       const line = d3.line()
-        .x(d => scaleX(d[0]))
-        .y(d => scaleY(d[1]))
+        .x(d => this.scaleX(d[0]))
+        .y(d => this.scaleY(d[1]))
 
-      svg.append('path')
-        .attr('fill', `rgba(200, 200, 200, 1.0)`)
-        .data( [this.linearData] )
-        .attr('d', area)
+      const fillPath = svg.append('g')
+        .append('path')
+          .attr('class', 'fill-path')
+          .data( [this.linearData] )
+          .attr('d', area)
+
+      if (!this.cssSetColor) {
+        fillPath.attr('fill', `rgba(200, 200, 200, 1.0)`)
+      }
       
-      svg.append('path')
+      const linePath = svg.append('path')
+        .attr('class', 'line-path')
         .attr('fill', 'none')
         .attr('stroke-width', '1px')
-        .attr('stroke', `rgba(100,100,100,1.0)`)
         .data( [this.linearData] )
         .attr('d', line)
+      
+      if (!this.cssSetColor) {
+        linePath.attr('stroke', `rgba(100,100,100,1.0)`)
+      }
 
       svg.append('g')
         .attr('transform', `translate(0, ${this.clientHeight})`)
-        .call(d3.axisBottom(scaleX))
+        .attr(`class`, `axis`)
+        .call(d3.axisBottom(this.scaleX))
 
       svg.append('g')
-        .call(d3.axisLeft(scaleY))
+        .attr(`class`, `axis`)
+        .call(d3.axisLeft(this.scaleY))
 
       // append xaxis label
 
@@ -420,7 +466,15 @@
         labelGroup.attr('transform', `translate(-35, ${this.clientHeight / 2 }) rotate(-90)`)
       }
 
-      return svgMain.node().outerHTML
+      return svgMain
+    }
+
+    generateSvg(){
+      const svgMain = this.generateD3(this.document.body)
+      svgMain.attr('xmlns', 'http://www.w3.org/2000/svg')
+      const svgToReturn = svgMain.node().outerHTML
+      this.document.body.removeChild(svgMain.node())
+      return svgToReturn
     }
   }
 
@@ -464,7 +518,7 @@
     }
   })
 
-  exports.weave = (d3Lib, mathjaxLib = null) => {
+  exports.weave = (d3Lib, mathjaxLib = null, _JSDOM = null) => {
     if (!d3Lib) throw new Error(`need to pass d3 instance`)
     if (mathjaxLib){
       if (!mathjaxLib.tex2svg) {
@@ -477,6 +531,7 @@
       }
     }
     d3 = d3Lib
+    JSDOM = _JSDOM
     return {
       parseReceptorMetadata,
       parseFingerprint,
@@ -486,4 +541,8 @@
     }
   }
 
-})(typeof exports === 'undefined' ? typeof module === 'undefined' ? window : module.exports : exports)
+})(typeof exports === 'undefined'
+  ? typeof module === 'undefined'
+    ? window
+    : module.exports
+  : exports)
