@@ -72,10 +72,10 @@ class BaseSvg{
     this.width = width || 400
     this.height = height || 400
     this.margin = {
-      left: 100,
-      right: 100,
-      top: 100,
-      bottom: 100,
+      left: 30,
+      right: 30,
+      top: 30,
+      bottom: 30,
       ...margin
     }
 
@@ -90,8 +90,6 @@ class BaseSvg{
     const { document } = w
     this.document = document
     this.window = w
-
-    this.redraw()
   }
 
   redraw(){
@@ -160,6 +158,12 @@ class PolarSvg extends BaseSvg{
   constructor(data, config){
     super(config)
 
+    this.margin.left = this.margin.left + 40
+    this.margin.right = this.margin.right + 70
+    this.margin.top = this.margin.top + 40
+    this.margin.bottom = this.margin.bottom + 40
+    this.redraw()
+
     this.polarData = data.map(({ density, ...rest }) => {
       return {
         ...rest,
@@ -208,7 +212,7 @@ class PolarSvg extends BaseSvg{
     const svgMain = d3.select(hostElement)
       .append('svg')
         .attr('xmlns', 'http://www.w3.org/2000/svg')
-        .attr('viewBox', '0 0 600 600')
+        .attr('viewBox', '0 0 400 400')
         .attr('width', '100%')
     const svg = svgMain
       .append('g')
@@ -233,8 +237,11 @@ class PolarSvg extends BaseSvg{
       .curve(d3.curveLinearClosed)
 
     // center of polar graph
+    
+    const halfH = (this.height - this.margin.top - this.margin.bottom) / 2 
+    const halfW = (this.width - this.margin.left - this.margin.right) / 2 
     const graphContainer = svg.append('g')
-      .attr('transform', `translate(${this.diameter / 2}, ${this.diameter / 2})`)
+      .attr('transform', `translate(${halfW}, ${halfH})`)
 
     // render mean
     const mean = graphContainer.append('path')
@@ -386,6 +393,10 @@ class PolarSvg extends BaseSvg{
 class LinearSvg extends BaseSvg{
   constructor(data, config){
     super(config)
+    this.margin.left = this.margin.left + 40
+    this.margin.bottom = this.margin.bottom + 40
+    this.redraw()
+
     this.linearData = data.map(({ density }, idx) => [idx, Number(density)])
     const { xAxis, yAxis } = config || {}
     this.xAxis = xAxis
@@ -397,7 +408,7 @@ class LinearSvg extends BaseSvg{
     this.scaleY = d3.scaleLinear().range([this.clientHeight, 0])
     const svgMain = d3.select(hostElement)
       .append('svg')
-        .attr('viewBox', '0 0 600 600')
+        .attr('viewBox', '0 0 400 400')
         .attr('width', '100%')
     const svg = svgMain
       .append('g')

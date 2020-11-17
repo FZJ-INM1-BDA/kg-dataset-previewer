@@ -286,8 +286,15 @@ export class RegionalFeatureView{
           .attr('cy', yPos)
           .attr('r', 5)
   
+        const adjustedXPos = (xPos + 128) > 400
+          ? xPos - 138
+          : xPos
+        const adjustedYPos = (xPos + 128) > 400
+          ? yPos - 18
+          : yPos
+        
         window['d3'].select(`#${guideLabelContainerlId}`)
-          .attr('transform', `translate(${xPos}, ${yPos})`)
+          .attr('transform', `translate(${adjustedXPos}, ${adjustedYPos})`)
   
         window['d3'].select(`#${guideLabelTextId}`)
           .text(`( ${xBisectedVal}, ${val[1]} )`)
@@ -310,7 +317,10 @@ export class RegionalFeatureView{
       drawingArea.on('mousemove', function() {
         const m = window['d3'].mouse(this)
         
-        const angle = Math.atan2(m[1] - height/2, m[0] - width/2)
+        const halfH = (height - margin.top - margin.bottom) / 2 + margin.top
+        const halfW = (width - margin.left - margin.right) / 2 + margin.left
+        const angle = Math.atan2(m[1] - halfH, m[0] - halfW)
+        
         const idx = Math.round(
           /**
            * correct for atan2 starts to positive x axis
@@ -338,13 +348,13 @@ export class RegionalFeatureView{
           const sdVal = linearScale(mean + sd)
 
           const meanCircleVal = [
-            width / 2 + Math.cos(discreteAngle) * meanVal,
-            height / 2 - Math.sin(discreteAngle) * meanVal
+            halfW + Math.cos(discreteAngle) * meanVal,
+            halfH - Math.sin(discreteAngle) * meanVal
           ]
 
           const sdCircleVal = [
-            width / 2 + Math.cos(discreteAngle) * sdVal,
-            height / 2 - Math.sin(discreteAngle) * sdVal
+            halfW + Math.cos(discreteAngle) * sdVal,
+            halfH - Math.sin(discreteAngle) * sdVal
           ]
 
           window['d3'].select(`#${guideCircle0Id}`)
