@@ -1,6 +1,7 @@
 FROM node:12-alpine
 
 COPY ./deploy /kgDsPrv
+COPY ./common /common
 
 WORKDIR /kgDsPrv
 
