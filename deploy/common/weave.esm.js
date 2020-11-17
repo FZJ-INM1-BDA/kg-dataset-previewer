@@ -208,8 +208,8 @@ class PolarSvg extends BaseSvg{
     const svgMain = d3.select(hostElement)
       .append('svg')
         .attr('xmlns', 'http://www.w3.org/2000/svg')
-        .attr('width', this.width)
-        .attr('height', this.height)
+        .attr('viewBox', '0 0 600 600')
+        .attr('width', '100%')
     const svg = svgMain
       .append('g')
         .attr('transform', `translate(${this.margin.left}, ${this.margin.top})`)
@@ -397,8 +397,8 @@ class LinearSvg extends BaseSvg{
     this.scaleY = d3.scaleLinear().range([this.clientHeight, 0])
     const svgMain = d3.select(hostElement)
       .append('svg')
-        .attr('width', this.width)
-        .attr('height', this.height)
+        .attr('viewBox', '0 0 600 600')
+        .attr('width', '100%')
     const svg = svgMain
       .append('g')
         .attr('transform', `translate(${this.margin.left}, ${this.margin.top})`)

@@ -1,6 +1,7 @@
 import { Component, Prop, h, Watch, State, Event, EventEmitter } from "@stencil/core";
 import { KG_DATASET_PREVIEWER_BACKEND_URL } from "../../utils/utils";
 import { weave } from '../../../common/weave'
+import { prependUrl } from "../../utils/renderUtil";
 
 let parseReceptorProfile, LinearSvg, parseFingerprint, PolarSvg, parseReceptorMetadata
 
@@ -430,6 +431,11 @@ export class RegionalFeatureView{
       this.weaveClsInst = new PolarSvg(parsedFp, config)
       this.weaveClsInst.setMetadata(parsedMetadata)
       
+    } else if (mimetype.indexOf('image') >= 0) {
+      const imageUrl = input['data']['image']['url']
+      const prependedImageUrl = prependUrl({ backendUrl: this.backendUrl, url: imageUrl })
+      this.containerEl.style.background = `url('${prependedImageUrl}') center center / contain no-repeat`
+      this.containerEl.setAttribute(`data-img-src`, prependedImageUrl)
     } else {
       throw new Error(`mimetype ${mimetype} cannot be parsed properly`)
     }
@@ -445,6 +451,6 @@ export class RegionalFeatureView{
   }
 
   render(){
-    return <div ref={el => this.containerEl = el}></div>
+    return <div class="container" ref={el => this.containerEl = el}></div>
   }
 }

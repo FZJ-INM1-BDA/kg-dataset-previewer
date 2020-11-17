@@ -66,6 +66,16 @@ router.get('/raw_proxy_data/:datasetSchema/:datasetId/:filename',
   getSinglePreview,
   async (req, res, next) => {
     const returnObj = res.locals[DS_SINGLE_PRV_KEY]
+    if (returnObj['mimetype'] === 'image/tiff') {
+      const { datasetSchema, datasetId, filename } = req.params
+      returnObj['data'] = {
+        image: {
+          url: `getImagePipe?kgSchema=${encodeURIComponent(datasetSchema)}&kgId=${encodeURIComponent(datasetId)}&filename=${encodeURIComponent(filename)}`,
+          mimetype: 'image/png'
+        }
+      }
+      return next()
+    }
     const { ["@context"]: context, url } = returnObj
     returnObj['data'] = {}
     for (const key in url) {
