@@ -1,7 +1,6 @@
 import { Component, Prop, h, Watch, State, Event, EventEmitter } from "@stencil/core";
 import { KG_DATASET_PREVIEWER_BACKEND_URL } from "../../utils/utils";
-import '../../../common/weave'
-
+import { weave } from '../../../common/weave'
 
 let parseReceptorProfile, LinearSvg, parseFingerprint, PolarSvg, parseReceptorMetadata
 
@@ -126,7 +125,7 @@ export class RegionalFeatureView{
       parseFingerprint: pRfp,
       PolarSvg: PSvg,
       parseReceptorMetadata: pRMeta
-    } = window['weave'](window['d3'], window['MathJax'])
+    } = weave(window['d3'], window['MathJax'])
     parseReceptorProfile = prp
     LinearSvg = LSvg
     PolarSvg = PSvg

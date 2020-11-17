@@ -1,6 +1,6 @@
 {
   "name": "kg-dataset-previewer",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "Preview a few manually curated datasets.",
   "main": "dist/index.js",
   "module": "dist/index.mjs",
@@ -12,8 +12,7 @@
   "unpkg": "dist/kg-dataset-previewer/kg-dataset-previewer.js",
   "files": [
     "dist/",
-    "loader/",
-    "deploy/"
+    "loader/"
   ],
   "scripts": {
     "build": "stencil build --docs",

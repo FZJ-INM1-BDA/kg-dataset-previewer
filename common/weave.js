@@ -1,1 +1,1 @@
-../deploy/common/weave.js
+../deploy/common/weave.esm.js

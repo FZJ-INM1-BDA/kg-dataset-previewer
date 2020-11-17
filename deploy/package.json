@@ -4,8 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "prestart": "echo transpiling esm to cjs for nodejs && rollup ./common/weave.esm.js --file ./common/weave.js --format cjs",
     "start": "node server.js",
-    "mocha": "mocha"
+    "mocha": "mocha",
+    "rollup": "rollup"
   },
   "keywords": [],
   "author": "",
@@ -23,10 +25,11 @@
     "rate-limit-redis": "^2.0.0",
     "redis": "^3.0.2",
     "sharp": "^0.25.4",
-    "tmp": "^0.2.1"
+    "tmp": "^0.2.1",
+    "rollup": "^2.33.2"
   },
   "devDependencies": {
     "chai": "^4.2.0",
-    "mocha": "^8.0.1"
+    "mocha": "^8.2.1"
   }
 }
