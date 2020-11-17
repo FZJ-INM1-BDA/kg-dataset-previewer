@@ -12,7 +12,7 @@ const { DS_SINGLE_PRV_KEY, APP_NAME } = require('../constants')
 const { getPreviewsHandler } = require('./getPreviews')
 const { getSinglePreview } = require('./getSinglePreview')
 const { store } = require('../store')
-const { weave } = require('../../common/weave')
+const { weave } = require('../common/weave')
 const { queryToParamMiddleware } = require('./util')
 
 let LinearSvg, PolarSvg, parseFingerprint, parseReceptorMetadata, parseReceptorProfile
