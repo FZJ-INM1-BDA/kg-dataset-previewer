@@ -15,6 +15,11 @@ svg .line-path
   fill: none;
 }
 
+svg .guideLine
+{
+  stroke: currentColor;
+}
+
 svg .radial-guidelines
 {
   stroke: currentColor;
@@ -30,7 +35,7 @@ svg .radial-guidelines
 
 [kg-ds-prv-darkmode] svg .fill-path
 {
-  fill: rgba(50, 50, 50, 1.0);
+  fill: rgba(100, 100, 100, 1.0);
 }
 
 

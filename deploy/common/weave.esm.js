@@ -69,13 +69,13 @@ class BaseSvg{
   constructor(config = {}){
 
     const { width, height, margin, fontFamily, cssSetColor } = config
-    this.width = width || 600
-    this.height = height || 600
+    this.width = width || 400
+    this.height = height || 400
     this.margin = {
-      left: 70,
-      right: 70,
-      top: 70,
-      bottom: 70,
+      left: 100,
+      right: 100,
+      top: 100,
+      bottom: 100,
       ...margin
     }
 

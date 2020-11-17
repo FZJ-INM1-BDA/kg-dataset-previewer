@@ -149,9 +149,9 @@ export class RegionalFeatureView{
 
     svgMain.append('line')
       .attr('id', guideLineXId)
+      .attr('class', 'guideLine')
       .attr('fill', 'none')
       .attr('stroke-width', '1px')
-      .attr('stroke', `rgba(100,100,100,1.0)`)
       .attr("x1", 0)
       .attr("y1", 0)
       .attr("x2", 0)
@@ -159,9 +159,9 @@ export class RegionalFeatureView{
 
     svgMain.append('line')
       .attr('id', guideLineYId)
+      .attr('class', 'guideLine')
       .attr('fill', 'none')
       .attr('stroke-width', '1px')
-      .attr('stroke', `rgba(100,100,100,1.0)`)
       .attr("x1", 0)
       .attr("y1", 0)
       .attr("x2", 0)
