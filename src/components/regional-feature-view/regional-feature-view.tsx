@@ -256,8 +256,8 @@ export class RegionalFeatureView{
 
     if (linearData) {
 
-      drawingArea.on('mousemove', function(){
-        const m = window['d3'].mouse(this)
+      drawingArea.on('mousemove', function(ev){
+        const m = window['d3'].pointer(ev)
         const xDisplacement = m[0] - margin.left
         const xValue = scaleX.invert(xDisplacement)
         const xBisectedVal = window['d3'].bisect(linearData.map(v => v[0]), xValue)
@@ -314,8 +314,8 @@ export class RegionalFeatureView{
 
     }
     if (polarData) {
-      drawingArea.on('mousemove', function() {
-        const m = window['d3'].mouse(this)
+      drawingArea.on('mousemove', function(ev) {
+        const m = window['d3'].pointer(ev)
         
         const halfH = (height - margin.top - margin.bottom) / 2 + margin.top
         const halfW = (width - margin.left - margin.right) / 2 + margin.left

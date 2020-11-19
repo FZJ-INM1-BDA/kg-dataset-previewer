@@ -488,7 +488,36 @@ class LinearSvg extends BaseSvg{
   }
 }
 
-const parseReceptorMetadata = tsv => d3.tsvParse(tsv, data => {
+/**
+ * d3 dsv.parse uses unsafe eval
+ * which I would not like to enable
+ * compromise is to use parseRow
+ * less performant, but does not use unafe eval
+ * api is slightly different, so the glue code
+ * 
+ * for more info, see:
+ * 
+ * https://github.com/d3/d3/issues/1904
+ */
+
+function sanitizedTsvParse(){
+  const tsv = arguments[0]
+  const cb = arguments[1]
+  const rows = d3.tsvParseRows(tsv)
+  const columns = rows[0]
+  const data = rows.slice(1).map(row => {
+    const returnObj = {}
+    for (const idx in row){
+      returnObj[columns[idx]] = row[idx]
+    }
+    return cb(returnObj)
+  })
+
+  data['columns'] = columns
+  return data
+}
+
+const parseReceptorMetadata = tsv => sanitizedTsvParse(tsv, data => {
   return {
     receptor: {
       label: data['receptor (label)'],
@@ -505,7 +534,7 @@ const parseReceptorMetadata = tsv => d3.tsvParse(tsv, data => {
   }
 })
 
-const parseFingerprint= tsv => d3.tsvParse(tsv, data => {
+const parseFingerprint= tsv => sanitizedTsvParse(tsv, data => {
   const key = Object.keys(data).find(key => /receptor label/i.test(key))
   return {
     receptor: {
@@ -519,7 +548,7 @@ const parseFingerprint= tsv => d3.tsvParse(tsv, data => {
   }
 })
 
-const parseReceptorProfile = tsv => d3.tsvParse(tsv, data => {
+const parseReceptorProfile = tsv => sanitizedTsvParse(tsv, data => {
   return {
     corticalDepth: data['cortical depth (value)'],
     corticalDepthUnit: data['cortical depth (unit)'],
