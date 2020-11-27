@@ -87,6 +87,7 @@ router.get('/raw_proxy_data/:datasetSchema/:datasetId/:filename',
           .replace(/\{/g, '\t')
           .replace(/\\\\alpha/g, `\\alpha`)
           .replace(/5-HT_1_A/g, '5-HT{_1}{_A}')
+          .replace(/\$5-HT_\t1A}\$/, '$5-HT{_1}{_A}$')
       }
     }
     next()
