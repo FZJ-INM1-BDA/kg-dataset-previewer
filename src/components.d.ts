@@ -8,10 +8,32 @@
 
 import { HTMLStencilElement, JSXBase } from '@stencil/core/internal';
 import {
+  TBSFingerprint,
+  TOriginalFPDataType,
+  TOriginalMetadata,
+  TOriginalProfileDataType,
+  TProfile,
+  TReceptorSymbol,
+} from './utils/types';
+import {
   IDatasetFile,
 } from './utils/renderUtil';
 
 export namespace Components {
+  interface KgDatasetDumbLine {
+    'darkmode': boolean;
+    'profile': TOriginalProfileDataType;
+    'profileBs': TProfile;
+    'profileUnit': string;
+    'receptorSymbols': TReceptorSymbol;
+  }
+  interface KgDatasetDumbRadar {
+    'darkmode': boolean;
+    'meta': TOriginalMetadata[];
+    'metaBs': TReceptorSymbol;
+    'radar': TOriginalFPDataType[];
+    'radarBs': TBSFingerprint;
+  }
   interface KgDatasetList {
     'backendUrl': string;
     'containerClass': string;
@@ -49,6 +71,18 @@ export namespace Components {
 declare global {
 
 
+  interface HTMLKgDatasetDumbLineElement extends Components.KgDatasetDumbLine, HTMLStencilElement {}
+  var HTMLKgDatasetDumbLineElement: {
+    prototype: HTMLKgDatasetDumbLineElement;
+    new (): HTMLKgDatasetDumbLineElement;
+  };
+
+  interface HTMLKgDatasetDumbRadarElement extends Components.KgDatasetDumbRadar, HTMLStencilElement {}
+  var HTMLKgDatasetDumbRadarElement: {
+    prototype: HTMLKgDatasetDumbRadarElement;
+    new (): HTMLKgDatasetDumbRadarElement;
+  };
+
   interface HTMLKgDatasetListElement extends Components.KgDatasetList, HTMLStencilElement {}
   var HTMLKgDatasetListElement: {
     prototype: HTMLKgDatasetListElement;
@@ -73,6 +107,8 @@ declare global {
     new (): HTMLKgDsPrvRegionalFeatureViewElement;
   };
   interface HTMLElementTagNameMap {
+    'kg-dataset-dumb-line': HTMLKgDatasetDumbLineElement;
+    'kg-dataset-dumb-radar': HTMLKgDatasetDumbRadarElement;
     'kg-dataset-list': HTMLKgDatasetListElement;
     'kg-dataset-previewer': HTMLKgDatasetPreviewerElement;
     'kg-dataset-previewer-chart': HTMLKgDatasetPreviewerChartElement;
@@ -81,6 +117,22 @@ declare global {
 }
 
 declare namespace LocalJSX {
+  interface KgDatasetDumbLine {
+    'darkmode'?: boolean;
+    'onKg-ds-prv-regional-feature-mouseover'?: (event: CustomEvent<any>) => void;
+    'profile'?: TOriginalProfileDataType;
+    'profileBs'?: TProfile;
+    'profileUnit'?: string;
+    'receptorSymbols'?: TReceptorSymbol;
+  }
+  interface KgDatasetDumbRadar {
+    'darkmode'?: boolean;
+    'meta'?: TOriginalMetadata[];
+    'metaBs'?: TReceptorSymbol;
+    'onKg-ds-prv-regional-feature-mouseover'?: (event: CustomEvent<any>) => void;
+    'radar'?: TOriginalFPDataType[];
+    'radarBs'?: TBSFingerprint;
+  }
   interface KgDatasetList {
     'backendUrl'?: string;
     'containerClass'?: string;
@@ -114,6 +166,8 @@ declare namespace LocalJSX {
   }
 
   interface IntrinsicElements {
+    'kg-dataset-dumb-line': KgDatasetDumbLine;
+    'kg-dataset-dumb-radar': KgDatasetDumbRadar;
     'kg-dataset-list': KgDatasetList;
     'kg-dataset-previewer': KgDatasetPreviewer;
     'kg-dataset-previewer-chart': KgDatasetPreviewerChart;
@@ -127,6 +181,8 @@ export { LocalJSX as JSX };
 declare module "@stencil/core" {
   export namespace JSX {
     interface IntrinsicElements {
+      'kg-dataset-dumb-line': LocalJSX.KgDatasetDumbLine & JSXBase.HTMLAttributes<HTMLKgDatasetDumbLineElement>;
+      'kg-dataset-dumb-radar': LocalJSX.KgDatasetDumbRadar & JSXBase.HTMLAttributes<HTMLKgDatasetDumbRadarElement>;
       'kg-dataset-list': LocalJSX.KgDatasetList & JSXBase.HTMLAttributes<HTMLKgDatasetListElement>;
       'kg-dataset-previewer': LocalJSX.KgDatasetPreviewer & JSXBase.HTMLAttributes<HTMLKgDatasetPreviewerElement>;
       'kg-dataset-previewer-chart': LocalJSX.KgDatasetPreviewerChart & JSXBase.HTMLAttributes<HTMLKgDatasetPreviewerChartElement>;

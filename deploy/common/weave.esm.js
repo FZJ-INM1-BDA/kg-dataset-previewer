@@ -54,9 +54,10 @@ class BaseSvg{
   }
 
   static GenerateLabel(label) {
-    const { latex } = label
-
-    const trueLatex = latex.replace(/^\$*/, '').replace(/\$*$/, '') //.replace(/^\\+/, '\\')
+    const { latex, label: fallbackLabel } = label
+    const trueLatex = latex 
+      ? latex.replace(/^\$*/, '').replace(/\$*$/, '') //.replace(/^\\+/, '\\')
+      : fallbackLabel
     const _ = mathjax.tex2svg(trueLatex, { display: true })
     const { width, height } = _.children[0].attributes
     return {
@@ -284,10 +285,10 @@ class PolarSvg extends BaseSvg{
     }
 
     // append radial guide lines
-    const receptors = this.polarData.map(({ receptor }) => {
+    const receptors = this.polarData.map(({ receptor, ...rest }) => {
       const { label: cLabel } = receptor
-      const found = this.metadata.find(({ receptor: mReceptor }) => mReceptor.label === cLabel)
-      return found && found.receptor || null
+      const found = (this.metadata || []).find(({ receptor: mReceptor }) => mReceptor.label === cLabel)
+      return found && found.receptor || { label: cLabel }
     })
 
     const radialGuideLineContainers = graphContainer.selectAll('g')

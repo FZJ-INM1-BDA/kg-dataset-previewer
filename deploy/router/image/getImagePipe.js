@@ -4,16 +4,14 @@ const got = require('got')
 const sharp = require('sharp')
 const { PassThrough } = require('stream')
 const d3 = require('d3')
-const tmp = require('tmp')
-const fs = require('fs')
-const { exec } = require('child_process')
 
-const { DS_SINGLE_PRV_KEY, APP_NAME } = require('../constants')
-const { getPreviewsHandler } = require('./getPreviews')
-const { getSinglePreview } = require('./getSinglePreview')
-const { store } = require('../store')
-const { weave } = require('../common/weave')
-const { queryToParamMiddleware } = require('./util')
+const { DS_SINGLE_PRV_KEY, APP_NAME } = require('../../constants')
+const { getPreviewsHandler } = require('../getPreviews')
+const { getSinglePreview } = require('../getSinglePreview')
+const { store } = require('../../store')
+const { weave } = require('../../common/weave')
+const { queryToParamMiddleware } = require('../util')
+const { getGzipSharpStream, setBufferToStore } = require('./util')
 
 let LinearSvg, PolarSvg, parseFingerprint, parseReceptorMetadata, parseReceptorProfile
 const mathjaxInitPr = require('mathjax').init({
@@ -79,7 +77,8 @@ router.get('/',
     passThrough.on('end', () => {
       if (buf.length === 0) return
       const totalBuffer = Buffer.concat(buf)
-      store.set(getStoreKey({ datasetId, filename }), totalBuffer.toString('base64'))
+      const key = getStoreKey({ datasetId, filename })
+      setBufferToStore(key, totalBuffer)
     })
 
     const { mimetype } = singlePrv
@@ -91,32 +90,18 @@ router.get('/',
         _url = _url.replace(`${key}:`, contexts[key])
       }
 
-      tmp.file({ postfix: '.tif' }, (err, filePath, fd, cleancb) => {
-        if (err) {
-          console.error(`[${APP_NAME}] generating temp file error`, err)
-          res.status(500).send(err)
-          return
-        }
+      res.setHeader('Content-Type', 'image/png')
+      res.setHeader('Content-Encoding', 'gzip')
 
-        exec(`curl -o ${filePath} '${_url}'`, (err, stdout, stderr) => {
-          if (err) {
-            console.error(err)
-            return res.status(500).send(err)
-          }
-
-          res.setHeader('Content-Type', 'image/png')
-          res.setHeader('Content-Encoding', 'gzip')
-
-          sharp(filePath)
-            .png()
-            .pipe(gzip)
-            .pipe(passThrough)
-            .pipe(res)
-            .on('finish', () => {
-              fs.unlink(filePath, () => cleancb())
-            })
-        })
+      const s = await getGzipSharpStream(_url)
+      
+      s.on('error', err => {
+        res.status(500).send(err)
       })
+
+      // getGzipSharpStream already caches
+      // passthrough remains, for backwards compat reason
+      s.pipe(res)
 
       /**
        * got fetching tiff does not seem to work on OKD. save to file with curl, then read from file instead

@@ -41,6 +41,8 @@
   </label>
 
   <div class="container">
+    <div class="row" id="first-row">
+    </div>
     <div class="row">
 
       <kg-ds-prv-regional-feature-view
@@ -106,7 +108,7 @@
       <kg-dataset-list
         kg-ds-prv-container-class="ul-container test-container"
         kg-ds-prv-item-class="item-class"
-        kg-ds-prv-backend-url="http://localhost:1234/datasetPreview"
+        kg-ds-prv-backend-url="http://localhost:1234/v2"
         kg-ds-prv-filter-criteria='["neuroglancer/seeg/coordinate/v1.0.0/188ced88-c43a-4e7f-a8e8-e60d2e995f7a"]'
         kg-ds-prv-kg-id="154e9d64-27aa-458d-a289-3e42e4269235">
       
@@ -179,11 +181,22 @@
   }
   document.addEventListener('change', (ev) => {
     const { checked } = checkbox
+    const tagsTobeToggled = [
+      'kg-dataset-previewer',
+      'kg-ds-prv-regional-feature-view',
+      'kg-dataset-dumb-line',
+      'kg-dataset-dumb-radar',
+    ]
 
-    for (const prvs of [...kgDsPrvs, ...kgDsRegFeat]){
-      prvs.setAttribute('kg-ds-prv-darkmode', checked)
-      if (prvs.getDownloadPreviewHref )prvs.getDownloadPreviewHref()
+    for (const tag of tagsTobeToggled) {
+      const els = document.querySelectorAll(tag)
+
+      for (const el of els){
+        el.setAttribute('kg-ds-prv-darkmode', checked)
+        if (el.getDownloadPreviewHref )el.getDownloadPreviewHref()
+      }
     }
+
 
     if (checked) {
       document.body.style.backgroundColor = `rgb(30,30,30)`
@@ -191,5 +204,33 @@
       document.body.style.backgroundColor = `rgb(255,255,255)`
     }
   })
+
+  const s = (async () => {
+
+    const json = await fetch(`http://localhost:1234/v2/_bs`).then(res => res.json())
+    const profileBs = json.data._ReceptorDistribution__profiles['5-HT1A']
+
+    const container = document.querySelector('#first-row')
+
+    const dumbLineEl = document.createElement('kg-dataset-dumb-line')
+    dumbLineEl.profileBs = profileBs
+    container.appendChild(dumbLineEl)
+    
+    const dumbRadarEl = document.createElement('kg-dataset-dumb-radar')
+    const radarBs = json.data._ReceptorDistribution__fingerprint
+    dumbRadarEl.radarBs = radarBs
+    dumbRadarEl.metaBs = json.receptor_symbols
+    container.appendChild(dumbRadarEl)
+
+    const autoBs = json.data['_ReceptorDistribution__autoradiographs']['5-HT1A']
+    const query = autoBs.replace('https://object.cscs.ch/v1', '')
+    const imgEl = document.createElement('img')
+    imgEl.src = `http://localhost:1234/v2/imageProxy/v1?u=${encodeURIComponent(query)}`
+    imgEl.style.maxWidth = `20em`
+    imgEl.style.height = `auto`
+    imgEl.style.display = `inline-block`
+    container.appendChild(imgEl)
+  })()
+    
 </script>
 </html>

@@ -24,6 +24,19 @@
 | `kg-ds-prv-regional-feature-mouseover` |             | `CustomEvent<any>` |
 
 
+## Dependencies
+
+### Depends on
+
+- [kg-dataset-previewer-chart](../kg-dataset-previewer-charts)
+
+### Graph
+```mermaid
+graph TD;
+  kg-ds-prv-regional-feature-view --> kg-dataset-previewer-chart
+  style kg-ds-prv-regional-feature-view fill:#f9f,stroke:#333,stroke-width:4px
+```
+
 ----------------------------------------------
 
 *Built with [StencilJS](https://stenciljs.com/)*

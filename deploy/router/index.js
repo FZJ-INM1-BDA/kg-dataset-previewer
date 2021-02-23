@@ -24,7 +24,25 @@ const getCacheCtrl = ({ minute=1, hour=0, day=0 } = {}) => (_req, res, next) => 
 
 const oneMinCache = getCacheCtrl()
 
-router.use('/getImagePipe', oneMinCache, require('./getImagePipe'))
+// used exclusive for debugging dumb components
+router.get('/_bs', async (_req, res) => {
+  try {
+
+    const { body } = await got(`https://brainscapes.apps-dev.hbp.eu/features/ReceptorDistribution?region=hoc1`, {
+      headers: {
+        'Authorization': `Bearer ${process.env.HBP_ACCESS_TOKEN}`
+      }
+    })
+
+    res.setHeader('content-type', 'application/json')
+    res.status(200).send(body)
+  } catch(e) {
+    res.status(500).end()
+  }
+})
+
+router.use('/imageProxy', oneMinCache, require('./image/imageProxy'))
+router.use('/getImagePipe', oneMinCache, require('./image/getImagePipe'))
 
 router.use('/proxy',
   oneMinCache,

@@ -49,12 +49,14 @@ Type: `Promise<unknown>`
 
  - [kg-dataset-list](../kg-dataset-list)
  - [kg-dataset-previewer](../kg-dataset-previewer)
+ - [kg-ds-prv-regional-feature-view](../regional-feature-view)
 
 ### Graph
 ```mermaid
 graph TD;
   kg-dataset-list --> kg-dataset-previewer-chart
   kg-dataset-previewer --> kg-dataset-previewer-chart
+  kg-ds-prv-regional-feature-view --> kg-dataset-previewer-chart
   style kg-dataset-previewer-chart fill:#f9f,stroke:#333,stroke-width:4px
 ```
 
