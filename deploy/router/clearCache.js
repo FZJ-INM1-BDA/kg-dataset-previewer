@@ -23,7 +23,7 @@ const redisPort = REDIS_PORT || REDIS_RATE_LIMITING_DB_EPHEMERAL_PORT_6379_TCP_P
 
 const userPass = `${REDIS_USERNAME || ''}${( REDIS_PASSWORD && (':' + REDIS_PASSWORD)) || ''}${ (REDIS_USERNAME || REDIS_PASSWORD) && '@'}`
 
-const redisURL = redisAddr && `${redisProto}://${userPass}${redisAddr}:${redisPort}`
+const redisURL = null && redisAddr && `${redisProto}://${userPass}${redisAddr}:${redisPort}`
 
 const RateLimit = require('express-rate-limit')
 const RedisStore = require('rate-limit-redis')
