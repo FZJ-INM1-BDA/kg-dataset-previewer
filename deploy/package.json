@@ -25,7 +25,6 @@
     "rate-limit-redis": "^2.0.0",
     "redis": "^3.0.2",
     "rollup": "^2.33.2",
-    "sharp": "^0.25.4",
     "tmp": "^0.2.1"
   },
   "devDependencies": {
